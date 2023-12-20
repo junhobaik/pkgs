@@ -7,4 +7,4 @@ const Button = (props: ButtonProps) => {
   return <button>{children}</button>;
 };
 
-export default Button;
+export { Button };

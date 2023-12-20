@@ -2,7 +2,6 @@
   "name": "react-components",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -23,12 +22,14 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-dts": "^3.6.4"
   },
-  "main": "src/index",
+  "main": "dist/index.mjs",
   "files": [
     "dist"
   ],
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/?",
   "publishConfig": {
     "main": "dist/index.mjs",
