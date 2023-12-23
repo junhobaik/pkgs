@@ -1,7 +1,8 @@
 {
   "name": "root",
   "private": true,
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "turbo": "^1.11.2"
+  },
   "packageManager": "pnpm@8.11.0+sha1.01bf39424f1008f29012bbae851d2acb8a20a0d0"
 }
