@@ -1,0 +1,25 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "pkgs-storybook#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "react-components#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+
+    "react-components#build:watch": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "cache": false,
+      "persistent": true
+    },
+
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
