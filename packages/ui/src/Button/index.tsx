@@ -7,24 +7,22 @@ export interface ButtonProps
    */
   children?: React.ReactNode;
   /**
-   * 모든 스타일을 제거합니다.
+   * 모든 스타일을 제거
    * @default false
    */
   unset?: boolean;
+  /**
+   * 커스텀 스타일
+   */
   styles?: Record<string, unknown>;
 }
 
-const Button = ({
-  children = "",
-  unset = false,
-  styles = {},
-  ...restProps
-}: ButtonProps) => {
-  // const { children = "", unset = false, styles = {}, ...restProps } = props;
+const Button = (props: ButtonProps) => {
+  const { children = "", unset = false, styles = {}, ...restProps } = props;
 
   return (
     <ButtonStyled unset={unset} styles={styles} {...restProps}>
-      {children}?
+      {children}
     </ButtonStyled>
   );
 };
