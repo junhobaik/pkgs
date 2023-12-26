@@ -13,6 +13,16 @@
       "persistent": true
     },
 
+    "ui#storybook": {
+      "cache": false,
+      "persistent": true
+    },
+
+    "ui#storybook-build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist_sb/**"]
+    },
+
     "dev": {
       "cache": false,
       "persistent": true
