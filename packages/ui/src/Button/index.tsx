@@ -1,4 +1,6 @@
+import { useMemo } from "react";
 import styled, { css } from "styled-components";
+import { convertStylesToClassName, createStylesAPI } from "../utils";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,103 +14,101 @@ export interface ButtonProps
    */
   unset?: boolean;
   /**
+   * 버튼 내부 텍스트를 대문자로 표기합니다.
+   * @default false
+   */
+  upperCase?: boolean;
+  /**
    * 커스텀 스타일
    */
-  styles?: Record<string, unknown>;
+  styles?: Record<string, any>;
 }
 
-const Button = (props: ButtonProps) => {
-  const { children = "", unset = false, styles = {}, ...restProps } = props;
+export const Button = (props: ButtonProps) => {
+  const {
+    children = "",
+    unset = false,
+    upperCase = false,
+    styles = {},
+    ...restProps
+  } = props;
+
+  // children 파싱
+  const parsedChildren = useMemo(() => {
+    if (toString.call(children) === "[object String]") {
+      let text = children as string;
+
+      if (upperCase) text = text.toUpperCase();
+
+      return (
+        <>
+          <p style={{ margin: 0 }} className="bp-button-text">
+            {text}
+          </p>
+        </>
+      );
+    }
+
+    return children;
+  }, [children, upperCase]);
+
+  const parsedStylesClassName = useMemo(() => {
+    return Object.keys(styles).length ? convertStylesToClassName(styles) : "";
+  }, [styles]);
 
   return (
-    <ButtonStyled unset={unset} styles={styles} {...restProps}>
-      {children}
+    <ButtonStyled
+      className={`bp-button--root ${parsedStylesClassName}`}
+      {...restProps}
+      unset={unset}
+      styles={styles}
+    >
+      {parsedChildren}
     </ButtonStyled>
   );
 };
 
-export { Button };
-
 const ButtonStyled = styled.button.withConfig({
-  shouldForwardProp: (prop) => !["unset", "styles"].includes(prop),
+  shouldForwardProp: (prop) => !["unset", "styles", "upperCase"].includes(prop),
 })<ButtonProps>`
-  all: unset;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  cursor: pointer;
+  & {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
 
-  ${(props: ButtonProps) => {
-    if (props.unset) return "";
+    ${(props: ButtonProps) => {
+      if (props.unset) return "";
 
-    return css<ButtonProps>`
-      padding: 11px 21px;
-      border-radius: 980px;
-      transition: background-color 0.1s;
-      color: #ffffff;
-      background-color: #0071e3;
+      return css<ButtonProps>`
+        padding: 11px 21px;
+        border-radius: 980px;
+        transition: background-color 0.1s;
+        color: #ffffff;
+        background-color: #0071e3;
 
-      &:hover {
-        background-color: #0077ed;
-      }
+        &:hover {
+          background-color: #0077ed;
+        }
 
-      &:active {
-        background-color: #006edb;
-      }
+        &:active {
+          background-color: #006edb;
+        }
 
-      &:disabled {
-        background-color: #d8d8d8;
-        color: #8d8d8d;
-        cursor: default;
-      }
-    `;
-  }}
+        &:disabled {
+          background-color: #d8d8d8;
+          color: #8d8d8d;
+          cursor: default;
+        }
+      `;
+    }}
 
-  ${(props: ButtonProps) => {
-    if (!props.styles) return ``;
+    ${(props: ButtonProps) => {
+      if (!props.styles) return ``;
 
-    return createStylesAPI(props.styles);
-  }}
+      return createStylesAPI(props);
+    }}
+  }
 `;
-
-const camelToKebobCase = (str: string) =>
-  str.replace(/[A-Z]/g, (letter: string) => `-${letter.toLowerCase()}`);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type StyleObject = Record<string, any>;
-
-const createStylesAPI = (props: {
-  styles?: StyleObject;
-  className?: string;
-}) => {
-  const { styles, className } = props;
-  if (!styles || !Object.keys(styles).length) return null;
-
-  let resultStyle = "";
-
-  Object.entries(styles).forEach(([key, value]) => {
-    const selector =
-      key === "root"
-        ? "&"
-        : `.${camelToKebobCase(
-            className?.split(" ")[0] ?? ""
-          )}-${camelToKebobCase(key)}`;
-    const cssContent = Object.entries(value).map(([styleKey, styleValue]) => {
-      if (styleKey[0] === "&") {
-        const nestedStyles = Object.entries(styleValue as StyleObject).map(
-          ([nestedKey, nestedValue]) =>
-            `${camelToKebobCase(nestedKey)}: ${nestedValue} !important;`
-        );
-        return `${styleKey} { ${nestedStyles.join(" ")} }`;
-      }
-      return `${camelToKebobCase(styleKey)}: ${styleValue} !important;`;
-    });
-
-    resultStyle += `${selector} { ${cssContent.join(" ")} }\n`;
-  });
-
-  return css`
-    ${resultStyle}
-  `;
-};

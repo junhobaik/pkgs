@@ -20,3 +20,17 @@ export const Basic: Story = {
     children: "Button",
   },
 };
+
+export const CustomStyle: Story = {
+  render: (args) => {
+    const styles = {
+      root: {
+        backgroundColor: "red",
+        "&:hover": {
+          backgroundColor: "green",
+        },
+      },
+    };
+    return <Button styles={styles}>Custom Style Button</Button>;
+  },
+};
