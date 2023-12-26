@@ -1,16 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "pkgs-storybook#build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "react-components#build": {
+    "ui#build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
 
-    "react-components#build:watch": {
+    "ui#watch": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"],
       "cache": false,
