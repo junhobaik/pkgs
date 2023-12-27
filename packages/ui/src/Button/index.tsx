@@ -1,41 +1,49 @@
-import { useMemo } from "react";
-import styled, { css } from "styled-components";
-import { convertStylesToClassName, createStylesAPI } from "../utils";
+import { useMemo } from 'react';
+import styled, { css } from 'styled-components';
+import { convertStylesToClassName, createStylesAPI } from '../utils';
+import cn from 'classnames';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * children
    */
   children?: React.ReactNode;
+
   /**
    * 모든 스타일을 제거
    * @default false
    */
   unset?: boolean;
+
   /**
    * 버튼 내부 텍스트를 대문자로 표기합니다.
    * @default false
    */
   upperCase?: boolean;
+
   /**
    * 커스텀 스타일
    */
   styles?: Record<string, any>;
+
+  /**
+   * Full Width
+   */
+  fullWidth?: boolean;
+
+  /**
+   * TODO
+   * Color
+   */
+  color?: string;
 }
 
 export const Button = (props: ButtonProps) => {
-  const {
-    children = "",
-    unset = false,
-    upperCase = false,
-    styles = {},
-    ...restProps
-  } = props;
+  const { children = '', unset = false, upperCase = false, fullWidth = false, styles = {}, ...restProps } = props;
 
   // children 파싱
   const parsedChildren = useMemo(() => {
-    if (toString.call(children) === "[object String]") {
+    if (toString.call(children) === '[object String]') {
       let text = children as string;
 
       if (upperCase) text = text.toUpperCase();
@@ -53,12 +61,12 @@ export const Button = (props: ButtonProps) => {
   }, [children, upperCase]);
 
   const parsedStylesClassName = useMemo(() => {
-    return Object.keys(styles).length ? convertStylesToClassName(styles) : "";
+    return Object.keys(styles).length ? convertStylesToClassName(styles) : '';
   }, [styles]);
 
   return (
     <ButtonStyled
-      className={`bp-button--root ${parsedStylesClassName}`}
+      className={cn([`bp-button--root`, parsedStylesClassName, { 'bp-button--unset': unset }, { 'bp-button--full-width': fullWidth }])}
       {...restProps}
       unset={unset}
       styles={styles}
@@ -69,7 +77,7 @@ export const Button = (props: ButtonProps) => {
 };
 
 const ButtonStyled = styled.button.withConfig({
-  shouldForwardProp: (prop) => !["unset", "styles", "upperCase"].includes(prop),
+  shouldForwardProp: (prop) => !['unset', 'styles', 'upperCase'].includes(prop),
 })<ButtonProps>`
   & {
     all: unset;
@@ -80,7 +88,7 @@ const ButtonStyled = styled.button.withConfig({
     cursor: pointer;
 
     ${(props: ButtonProps) => {
-      if (props.unset) return "";
+      if (props.unset) return '';
 
       return css<ButtonProps>`
         padding: 11px 21px;
@@ -101,6 +109,10 @@ const ButtonStyled = styled.button.withConfig({
           background-color: #d8d8d8;
           color: #8d8d8d;
           cursor: default;
+        }
+
+        &.bp-button--full-width {
+          width: 100%;
         }
       `;
     }}
