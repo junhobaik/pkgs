@@ -1,22 +1,27 @@
-import { resolve } from "path";
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import dts from "vite-plugin-dts";
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import dts from 'vite-plugin-dts';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({
+      insertTypesEntry: true,
+    }),
+  ],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "index",
-      fileName: "index",
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'index',
+      fileName: 'index',
     },
     rollupOptions: {
-      external: ["react"],
+      external: ['react', 'react-dom'],
       output: {
         globals: {
-          react: "React",
+          react: 'React',
+          'react-dom': 'ReactDom',
         },
       },
     },
