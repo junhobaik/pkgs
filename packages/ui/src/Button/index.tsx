@@ -1,6 +1,4 @@
 import { useMemo } from 'react';
-import styled, { css } from 'styled-components';
-import { convertStylesToClassName, createStylesAPI } from '../utils';
 import cn from 'classnames';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -22,11 +20,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   upperCase?: boolean;
 
   /**
-   * 커스텀 스타일
-   */
-  styles?: Record<string, any>;
-
-  /**
    * Full Width
    */
   fullWidth?: boolean;
@@ -39,7 +32,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 export const Button = (props: ButtonProps) => {
-  const { children = '', unset = false, upperCase = false, fullWidth = false, styles = {}, ...restProps } = props;
+  const { children = '', unset = false, upperCase = false, fullWidth = false, ...restProps } = props;
 
   // children 파싱
   const parsedChildren = useMemo(() => {
@@ -60,67 +53,64 @@ export const Button = (props: ButtonProps) => {
     return children;
   }, [children, upperCase]);
 
-  const parsedStylesClassName = useMemo(() => {
-    return Object.keys(styles).length ? convertStylesToClassName(styles) : '';
-  }, [styles]);
-
   return (
-    <ButtonStyled
-      className={cn([`bp-button--root`, parsedStylesClassName, { 'bp-button--unset': unset }, { 'bp-button--full-width': fullWidth }])}
-      {...restProps}
-      unset={unset}
-      styles={styles}
+    <button
+      className={cn([
+        `ui-button--root`, //
+        { 'ui-button--unset': unset },
+        { 'ui-button--full-width': fullWidth },
+      ])}
     >
       {parsedChildren}
-    </ButtonStyled>
+    </button>
   );
 };
 
-const ButtonStyled = styled.button.withConfig({
-  shouldForwardProp: (prop) => !['unset', 'styles', 'upperCase'].includes(prop),
-})<ButtonProps>`
-  & {
-    all: unset;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    cursor: pointer;
+// const ButtonStyled = styled.button.withConfig({
+//   shouldForwardProp: (prop) => !['unset', 'styles', 'upperCase'].includes(prop),
+// })<ButtonProps>`
+//   & {
+//     all: unset;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     user-select: none;
+//     cursor: pointer;
 
-    ${(props: ButtonProps) => {
-      if (props.unset) return '';
+//     ${(props: ButtonProps) => {
+//       if (props.unset) return '';
 
-      return css<ButtonProps>`
-        padding: 11px 21px;
-        border-radius: 980px;
-        transition: background-color 0.1s;
-        color: #ffffff;
-        background-color: #0071e3;
+//       return css<ButtonProps>`
+//         padding: 11px 21px;
+//         border-radius: 980px;
+//         transition: background-color 0.1s;
+//         color: #ffffff;
+//         background-color: #0071e3;
 
-        &:hover {
-          background-color: #0077ed;
-        }
+//         &:hover {
+//           background-color: #0077ed;
+//         }
 
-        &:active {
-          background-color: #006edb;
-        }
+//         &:active {
+//           background-color: #006edb;
+//         }
 
-        &:disabled {
-          background-color: #d8d8d8;
-          color: #8d8d8d;
-          cursor: default;
-        }
+//         &:disabled {
+//           background-color: #d8d8d8;
+//           color: #8d8d8d;
+//           cursor: default;
+//         }
 
-        &.bp-button--full-width {
-          width: 100%;
-        }
-      `;
-    }}
+//         &.bp-button--full-width {
+//           width: 100%;
+//         }
+//       `;
+//     }}
 
-    ${(props: ButtonProps) => {
-      if (!props.styles) return ``;
+//     ${(props: ButtonProps) => {
+//       if (!props.styles) return ``;
 
-      return createStylesAPI(props);
-    }}
-  }
-`;
+//       return createStylesAPI(props);
+//     }}
+//   }
+// `;
