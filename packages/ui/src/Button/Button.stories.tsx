@@ -39,6 +39,6 @@ export const CustomStyle: Story = {
         },
       },
     };
-    return <Button styles={styles}>Custom Style Button</Button>;
+    return <Button>Custom Style Button</Button>;
   },
 };

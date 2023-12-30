@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import cn from 'classnames';
+import { buttonStyle } from './style.css';
+import { buttonStyle2 } from './style2.css';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -59,6 +61,8 @@ export const Button = (props: ButtonProps) => {
         `ui-button--root`, //
         { 'ui-button--unset': unset },
         { 'ui-button--full-width': fullWidth },
+        buttonStyle,
+        buttonStyle2,
       ])}
     >
       {parsedChildren}
@@ -70,12 +74,12 @@ export const Button = (props: ButtonProps) => {
 //   shouldForwardProp: (prop) => !['unset', 'styles', 'upperCase'].includes(prop),
 // })<ButtonProps>`
 //   & {
-//     all: unset;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     user-select: none;
-//     cursor: pointer;
+// all: unset;
+// display: flex;
+// align-items: center;
+// justify-content: center;
+// user-select: none;
+// cursor: pointer;
 
 //     ${(props: ButtonProps) => {
 //       if (props.unset) return '';

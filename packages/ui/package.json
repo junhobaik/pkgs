@@ -11,6 +11,8 @@
     "build-storybook": "storybook build -o dist_sb"
   },
   "dependencies": {
+    "@vanilla-extract/css": "^1.14.0",
+    "@vanilla-extract/vite-plugin": "^3.9.3",
     "classnames": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -43,17 +45,20 @@
     "vite": "^5.0.8",
     "vite-plugin-dts": "^3.6.4"
   },
-  "type": "module",
   "files": [
     "dist"
   ],
   "main": "dist/index.umd.cjs",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.umd.cjs",
       "types": "./dist/index.d.ts"
+    },
+    "./css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
   "types": "./dist/index.d.ts",

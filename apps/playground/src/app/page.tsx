@@ -1,15 +1,12 @@
-"use client";
-
-import Image from "next/image";
-
-import { Button } from "ui";
+import { Button } from 'ui';
+import 'ui/css';
 
 export default function Home() {
   return (
     <main>
       <div>
         <Button>test1</Button>
-        <Button styles={{ root: { backgroundColor: "red" } }}>test2</Button>
+        <Button>test2</Button>
       </div>
     </main>
   );
