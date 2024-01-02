@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import cn from 'classnames';
 import { buttonStyle } from './style.css';
-import { buttonStyle2 } from './style2.css';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -62,7 +61,6 @@ export const Button = (props: ButtonProps) => {
         { 'ui-button--unset': unset },
         { 'ui-button--full-width': fullWidth },
         buttonStyle,
-        buttonStyle2,
       ])}
     >
       {parsedChildren}
