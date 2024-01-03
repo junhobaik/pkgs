@@ -57,6 +57,12 @@ importers:
       '@vanilla-extract/css':
         specifier: ^1.14.0
         version: 1.14.0
+      '@vanilla-extract/dynamic':
+        specifier: ^2.1.0
+        version: 2.1.0
+      '@vanilla-extract/recipes':
+        specifier: ^0.5.1
+        version: 0.5.1(@vanilla-extract/css@1.14.0)
       '@vanilla-extract/vite-plugin':
         specifier: ^3.9.3
         version: 3.9.3(vite@5.0.9)
@@ -4540,6 +4546,12 @@ packages:
       outdent: 0.8.0
     dev: false
 
+  /@vanilla-extract/dynamic@2.1.0:
+    resolution: {integrity: sha512-8zl0IgBYRtgD1h+56Zu13wHTiMTJSVEa4F7RWX9vTB/5Xe2KtjoiqApy/szHPVFA56c+ex6A4GpCQjT1bKXbYw==}
+    dependencies:
+      '@vanilla-extract/private': 1.0.3
+    dev: false
+
   /@vanilla-extract/integration@6.2.4:
     resolution: {integrity: sha512-+AfymNMVq9sEUe0OJpdCokmPZg4Zi6CqKaW/PnUOfDwEn53ighHOMOBl5hAgxYR8Kiz9NG43Bn00mkjWlFi+ng==}
     dependencies:
@@ -4569,6 +4581,14 @@ packages:
 
   /@vanilla-extract/private@1.0.3:
     resolution: {integrity: sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==}
+    dev: false
+
+  /@vanilla-extract/recipes@0.5.1(@vanilla-extract/css@1.14.0):
+    resolution: {integrity: sha512-7dCuBgPQQ/89siQ0w2lkfjgkmToPUUDzFlHf5DRmt9ykiiycfA52tmPJ2RI/mr7jXi7U/vEN2aGP9QJSXEpGlA==}
+    peerDependencies:
+      '@vanilla-extract/css': ^1.0.0
+    dependencies:
+      '@vanilla-extract/css': 1.14.0
     dev: false
 
   /@vanilla-extract/vite-plugin@3.9.3(vite@5.0.9):
