@@ -21,24 +21,20 @@ export const Basic: Story = {
       <div>
         <Button>Default</Button>
         <br />
+        <Button color="orange">Color</Button>
+
+        <br />
+        <Button upperCase>uppercase</Button>
+
+        <br />
         <Button disabled>Disabled</Button>
+
         <br />
         <Button fullWidth>Full Width</Button>
+
+        <br />
+        <Button unset>Unset</Button>
       </div>
     );
-  },
-};
-
-export const CustomStyle: Story = {
-  render: (args) => {
-    const styles = {
-      root: {
-        backgroundColor: 'red',
-        '&:hover': {
-          backgroundColor: 'green',
-        },
-      },
-    };
-    return <Button>Custom Style Button</Button>;
   },
 };
