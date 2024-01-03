@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { additionalStyles, buttonRecipeStyle } from './style.css';
 import cn from 'classnames';
-import { buttonStyle } from './style.css';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -26,14 +26,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   fullWidth?: boolean;
 
   /**
-   * TODO
-   * Color
+   * Color, "blue" | "orange" | ...
    */
-  color?: string;
+  color?: 'gray' | 'pink' | 'grape' | 'violet' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'green' | 'lime' | 'orange';
 }
 
 export const Button = (props: ButtonProps) => {
-  const { children = '', unset = false, upperCase = false, fullWidth = false, ...restProps } = props;
+  const { children = '', unset = false, upperCase = false, fullWidth = false, color = 'blue', ...restProps } = props;
 
   // children 파싱
   const parsedChildren = useMemo(() => {
@@ -43,11 +42,9 @@ export const Button = (props: ButtonProps) => {
       if (upperCase) text = text.toUpperCase();
 
       return (
-        <>
-          <p style={{ margin: 0 }} className="bp-button-text">
-            {text}
-          </p>
-        </>
+        <p style={{ margin: 0 }} className="bp-button-text">
+          {text}
+        </p>
       );
     }
 
@@ -57,62 +54,19 @@ export const Button = (props: ButtonProps) => {
   return (
     <button
       className={cn([
-        `ui-button--root`, //
-        { 'ui-button--unset': unset },
-        { 'ui-button--full-width': fullWidth },
-        buttonStyle,
+        `ui-button`, //
+        {
+          [buttonRecipeStyle({
+            color,
+          })]: !unset,
+        },
+        { [additionalStyles.unset]: unset },
+        { [additionalStyles.fullWidth]: fullWidth },
       ])}
+      disabled={props.disabled ?? false}
+      {...restProps}
     >
       {parsedChildren}
     </button>
   );
 };
-
-// const ButtonStyled = styled.button.withConfig({
-//   shouldForwardProp: (prop) => !['unset', 'styles', 'upperCase'].includes(prop),
-// })<ButtonProps>`
-//   & {
-// all: unset;
-// display: flex;
-// align-items: center;
-// justify-content: center;
-// user-select: none;
-// cursor: pointer;
-
-//     ${(props: ButtonProps) => {
-//       if (props.unset) return '';
-
-//       return css<ButtonProps>`
-//         padding: 11px 21px;
-//         border-radius: 980px;
-//         transition: background-color 0.1s;
-//         color: #ffffff;
-//         background-color: #0071e3;
-
-//         &:hover {
-//           background-color: #0077ed;
-//         }
-
-//         &:active {
-//           background-color: #006edb;
-//         }
-
-//         &:disabled {
-//           background-color: #d8d8d8;
-//           color: #8d8d8d;
-//           cursor: default;
-//         }
-
-//         &.bp-button--full-width {
-//           width: 100%;
-//         }
-//       `;
-//     }}
-
-//     ${(props: ButtonProps) => {
-//       if (!props.styles) return ``;
-
-//       return createStylesAPI(props);
-//     }}
-//   }
-// `;
