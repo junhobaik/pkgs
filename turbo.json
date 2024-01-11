@@ -1,24 +1,24 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "ui#build": {
+    "@junhobaik/ui#build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
 
-    "ui#watch": {
+    "@junhobaik/ui#watch": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"],
       "cache": false,
       "persistent": true
     },
 
-    "ui#storybook": {
+    "@junhobaik/ui#storybook": {
       "cache": false,
       "persistent": true
     },
 
-    "ui#storybook-build": {
+    "@junhobaik/ui#storybook-build": {
       "dependsOn": ["^build"],
       "outputs": ["dist_sb/**"]
     },
