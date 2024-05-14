@@ -85,6 +85,8 @@ export const MilkdownEditor = ({ content, onChange, toolbarItems, milkdownRef }:
 
   useEffect(() => {
     const intervalID = setInterval(() => {
+      if (!document) return;
+
       let loaded = false;
 
       const testElement = document.createElement('span');

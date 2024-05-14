@@ -20,6 +20,9 @@ export default defineConfig({
     postcss: {
       plugins: [tailwindcss],
     },
+    modules: {
+      scopeBehaviour: 'local',
+    },
   },
   build: {
     minify: false,
