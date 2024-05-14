@@ -3,6 +3,7 @@
 #editorWrap > div > div.milkdown,
 #editorWrap > div > div.milkdown > div.editor {
   height: 100%;
+  overflow: hidden;
 }
 
 #editorWrap > div > div.milkdown {
@@ -11,6 +12,7 @@
 }
 
 #editorWrap > div > div.milkdown > div.editor {
+  overflow-y: auto;
   margin-left: 32px;
   padding: 16px;
   background-color: #ffffff;
