@@ -1,10 +1,11 @@
+import type { FC } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
 import { katexOptionsCtx } from '@milkdown/plugin-math';
 import { useInstance } from '@milkdown/react';
 import { useNodeViewContext } from '@prosemirror-adapter/react';
 import * as Tabs from '@radix-ui/react-tabs';
 import katex from 'katex';
-import type { FC } from 'react';
-import { useEffect, useMemo, useRef, useState } from 'react';
 
 export const MathBlock: FC = () => {
   const { node, setAttrs, selected } = useNodeViewContext();
@@ -59,7 +60,11 @@ export const MathBlock: FC = () => {
         <div className="py-3 text-center" ref={codePanel} />
       </Tabs.Content>
       <Tabs.Content value="source" className="relative">
-        <textarea className="block h-48 w-full bg-slate-800 font-mono text-gray-50" ref={codeInput} defaultValue={code} />
+        <textarea
+          className="block h-48 w-full bg-slate-800 font-mono text-gray-50"
+          ref={codeInput}
+          defaultValue={code}
+        />
         <button
           className="absolute right-0 bottom-full mb-1 inline-flex items-center justify-center rounded border border-gray-600 bg-nord8 px-6 py-2 text-base font-medium leading-6 text-gray-50 shadow-sm hover:bg-blue-200 focus:ring-2 focus:ring-offset-2 dark:bg-nord9"
           onClick={() => {

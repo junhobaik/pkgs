@@ -1,8 +1,9 @@
+import { ReactNode } from 'react';
+
 import { commandsCtx, editorViewCtx } from '@milkdown/core';
 import { Ctx, MilkdownPlugin } from '@milkdown/ctx';
 import { slashFactory } from '@milkdown/plugin-slash';
 import { createCodeBlockCommand, insertHrCommand, wrapInHeadingCommand } from '@milkdown/preset-commonmark';
-import { ReactNode } from 'react';
 
 type ConfigItem = {
   renderer: ReactNode;
@@ -58,7 +59,9 @@ export const config: Array<ConfigItem> = [
     onSelect: (ctx: Ctx) => ctx.get(commandsCtx).call(insertHrCommand.key),
     renderer: (
       <div className="flex items-center gap-2">
-        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">horizontal_rule</span>
+        <span className="material-symbols-outlined text-nord-10 dark:text-nord-9">
+          horizontal_rule
+        </span>
         Divider
       </div>
     ),

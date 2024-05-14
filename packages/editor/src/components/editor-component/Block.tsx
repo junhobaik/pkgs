@@ -1,10 +1,11 @@
+import { useEffect, useRef, useState } from 'react';
+
 import { commandsCtx } from '@milkdown/core';
 import { BlockProvider } from '@milkdown/plugin-block';
 import { turnIntoTextCommand, wrapInHeadingCommand } from '@milkdown/preset-commonmark';
 import { useInstance } from '@milkdown/react';
 import { usePluginViewContext } from '@prosemirror-adapter/react';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
 
 export const Block = () => {
   const { view } = usePluginViewContext();
@@ -39,9 +40,22 @@ export const Block = () => {
 
   return (
     <div className="hidden">
-      <div className={clsx('relative cursor-grab rounded-full border-2 bg-gray-50 dark:border-gray-900 dark:bg-gray-900', showMenu ? 'ring-2 ring-offset-2' : '')} ref={setElement}>
+      <div
+        className={clsx(
+          'relative cursor-grab rounded-full border-2 bg-gray-50 dark:border-gray-900 dark:bg-gray-900',
+          showMenu ? 'ring-2 ring-offset-2' : ''
+        )}
+        ref={setElement}
+      >
         <div onClick={() => setShowMenu((x) => !x)}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-5 w-5"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"

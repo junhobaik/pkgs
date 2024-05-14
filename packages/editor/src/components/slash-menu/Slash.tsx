@@ -1,10 +1,12 @@
-import { config } from './config';
-import { SlashItem } from './SlashItem';
-import { useSlashState } from './state';
+import { useEffect, useRef } from 'react';
+
 import { SlashProvider } from '@milkdown/plugin-slash';
 import { useInstance } from '@milkdown/react';
 import { usePluginViewContext } from '@prosemirror-adapter/react';
-import { useEffect, useRef } from 'react';
+
+import { SlashItem } from './SlashItem';
+import { config } from './config';
+import { useSlashState } from './state';
 
 export const Slash = () => {
   const { view, prevState } = usePluginViewContext();
@@ -48,7 +50,14 @@ export const Slash = () => {
       <div role="tooltip" ref={ref}>
         <ul className="m-0 w-96 list-none rounded bg-gray-50 shadow-lg ring-2 dark:bg-gray-900">
           {config.map((item, i) => (
-            <SlashItem key={i.toString()} index={i} instance={instance} onSelect={(ctx) => item.onSelect(ctx)} selected={i === selected} setSelected={setSelected}>
+            <SlashItem
+              key={i.toString()}
+              index={i}
+              instance={instance}
+              onSelect={(ctx) => item.onSelect(ctx)}
+              selected={i === selected}
+              setSelected={setSelected}
+            >
               {item.renderer}
             </SlashItem>
           ))}

@@ -1,4 +1,6 @@
-import { useLinkClass } from '@/hooks';
+import type { FC } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
 import { commandsCtx } from '@milkdown/core';
 import { TooltipProvider, tooltipFactory } from '@milkdown/plugin-tooltip';
 import {
@@ -25,8 +27,8 @@ import { $ctx, $prose } from '@milkdown/utils';
 import type { useWidgetViewFactory } from '@prosemirror-adapter/react';
 import { usePluginViewContext, useWidgetViewContext } from '@prosemirror-adapter/react';
 import clsx from 'clsx';
-import type { FC } from 'react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+
+import { useLinkClass } from '@/hooks';
 
 export const tableTooltipCtx = $ctx<TooltipProvider | null, 'tableTooltip'>(null, 'tableTooltip');
 
@@ -56,7 +58,8 @@ export const TableTooltip: FC = () => {
   const isCol = view.state.selection instanceof CellSelection && view.state.selection.isColSelection();
   const isWholeTable = isRow && isCol;
   const isAny = isRow || isCol;
-  const isHeading = isRow && view.state.doc.nodeAt((view.state.selection as CellSelection).$headCell.pos)?.type.name === 'table_header';
+  const isHeading =
+    isRow && view.state.doc.nodeAt((view.state.selection as CellSelection).$headCell.pos)?.type.name === 'table_header';
 
   useEffect(() => {
     if (ref.current && !loading && !tooltipProvider.current && view && view.state) {
@@ -200,7 +203,14 @@ const TableSelectorWidget: FC = () => {
 
   const [dragOver, setDragOver] = useState(false);
 
-  const common = useMemo(() => clsx('hover:bg-nord8 hover:dark:bg-nord9 absolute cursor-pointer bg-gray-200 dark:bg-gray-600', dragOver ? 'ring-2' : ''), [dragOver]);
+  const common = useMemo(
+    () =>
+      clsx(
+        'hover:bg-nord8 hover:dark:bg-nord9 absolute cursor-pointer bg-gray-200 dark:bg-gray-600',
+        dragOver ? 'ring-2' : ''
+      ),
+    [dragOver]
+  );
 
   const className = useMemo(() => {
     if (type === 'left') return 'w-2 h-full -left-3.5 top-0';

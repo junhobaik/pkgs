@@ -1,7 +1,8 @@
+import { FC, ReactNode } from 'react';
+
 import { Ctx } from '@milkdown/ctx';
 import { Instance } from '@milkdown/react';
 import { clsx } from 'clsx';
-import { FC, ReactNode } from 'react';
 
 type SlashItemProps = {
   index: number;
@@ -25,7 +26,10 @@ export const SlashItem: FC<SlashItemProps> = ({ index, instance, onSelect, child
 
   return (
     <li
-      className={clsx('cursor-pointer px-6 py-3', selected && 'bg-gray-200 dark:bg-gray-700')}
+      className={clsx(
+        'cursor-pointer px-6 py-3',
+        selected && 'bg-gray-200 dark:bg-gray-700'
+      )}
       onMouseMove={() => setSelected(index)}
       onMouseDown={(e) => {
         e.preventDefault();

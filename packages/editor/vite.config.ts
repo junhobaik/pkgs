@@ -2,6 +2,7 @@ import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+
 import tailwindcss from 'tailwindcss';
 
 export default defineConfig({

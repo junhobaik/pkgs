@@ -4,23 +4,38 @@ import { useEffect, useImperativeHandle, useState } from 'react';
 import type { CmdKey } from '@milkdown/core';
 import { editorViewCtx, parserCtx, serializerCtx } from '@milkdown/core';
 import { redoCommand, undoCommand } from '@milkdown/plugin-history';
-import { toggleEmphasisCommand, toggleStrongCommand, wrapInBlockquoteCommand, wrapInBulletListCommand, wrapInOrderedListCommand } from '@milkdown/preset-commonmark';
+import {
+  toggleEmphasisCommand,
+  toggleStrongCommand,
+  wrapInBlockquoteCommand,
+  wrapInBulletListCommand,
+  wrapInOrderedListCommand,
+} from '@milkdown/preset-commonmark';
 import { insertTableCommand, toggleStrikethroughCommand } from '@milkdown/preset-gfm';
 import { Slice } from '@milkdown/prose/model';
 import { Milkdown as Editor } from '@milkdown/react';
 import { callCommand, insert as insertUtil } from '@milkdown/utils';
-
-import useMilkdownEditor from './useMilkdownEditor';
-import { useLinkClass } from '@/hooks';
 import clsx from 'clsx';
 import { MaterialSymbol } from 'material-symbols';
 import { FadeLoader } from 'react-spinners';
 
-const Button: FC<{ icon: MaterialSymbol; onClick?: () => boolean | void | Promise<void | boolean> }> = ({ icon, onClick }) => {
+import { useLinkClass } from '@/hooks';
+
+import useMilkdownEditor from './useMilkdownEditor';
+
+import '@milkdown/theme-nord/style.css';
+
+const Button: FC<{ icon: MaterialSymbol; onClick?: () => boolean | void | Promise<void | boolean> }> = ({
+  icon,
+  onClick,
+}) => {
   const linkClass = useLinkClass();
   return (
     <div
-      className={clsx('flex h-10 w-10 cursor-pointer items-center justify-center rounded', linkClass(false))}
+      className={clsx(
+        'flex h-10 w-10 cursor-pointer items-center justify-center rounded',
+        linkClass(false)
+      )}
       onMouseDown={(e) => {
         onClick?.();
         e.preventDefault();
@@ -45,7 +60,7 @@ export interface MilkdownRef {
 }
 
 export const MilkdownEditor = ({ content, onChange, toolbarItems, milkdownRef }: MilkdownProps) => {
-  const [loadedFonts, setLoadedFonts] = useState(false);
+  const [loadedFonts, setLoadedFonts] = useState(true);
   const { loading, get } = useMilkdownEditor(content, onChange);
 
   const update = (markdown: string) => {
@@ -119,7 +134,7 @@ export const MilkdownEditor = ({ content, onChange, toolbarItems, milkdownRef }:
   return (
     <div className="flex flex-col relative border border-nord4 rounded-2xl h-full overflow-hidden overflow-y-auto">
       {loading && !loadedFonts ? (
-        <div className="flex items-center justify-center w-full h-full">
+        <div className="prose flex items-center justify-center w-full h-full">
           <FadeLoader color="rgb(100, 116, 139)" />
         </div>
       ) : (
@@ -135,7 +150,7 @@ export const MilkdownEditor = ({ content, onChange, toolbarItems, milkdownRef }:
             <Button icon="format_list_numbered" onClick={() => call(wrapInOrderedListCommand.key)} />
             <Button icon="format_quote" onClick={() => call(wrapInBlockquoteCommand.key)} />
             {toolbarItems?.map((item, i) => {
-              return <Button icon={item.icon} onClick={item.onClick} />;
+              return <Button key={i} icon={item.icon} onClick={item.onClick} />;
             })}
           </div>
 

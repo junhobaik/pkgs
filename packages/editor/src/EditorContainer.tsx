@@ -3,19 +3,15 @@ import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from '
 import { MilkdownProvider } from '@milkdown/react';
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/react';
 
-import { type MilkdownRef, MilkdownEditor } from '@/components';
-
+import { MilkdownEditor, type MilkdownRef } from '@/components';
 import { compose } from '@/utils/compose';
-import { decode } from '@/utils/share';
-
-import '@milkdown/theme-nord/style.css';
-import './styles/globals.css';
 
 import './styles/editor.css';
+import './styles/globals.css';
+import './styles/katex.css';
+import './styles/prism-node.css';
 import './styles/prose.css';
 import './styles/prosemirror.css';
-import './styles/prism-node.css';
-import './styles/katex.css';
 
 const Provider = compose(MilkdownProvider, ProsemirrorAdapterProvider);
 
@@ -53,9 +49,11 @@ const EditorContainer = forwardRef<EditorRef, EditorContainerProps>((props, ref)
   }));
 
   return (
-    <Provider>
-      <MilkdownEditor milkdownRef={milkdownRef} content={content} onChange={onMilkdownChange} />
-    </Provider>
+    <div id="pkg-editor" style={{ height: '100%' }}>
+      <Provider>
+        <MilkdownEditor milkdownRef={milkdownRef} content={content} onChange={onMilkdownChange} />
+      </Provider>
+    </div>
   );
 });
 

@@ -1,12 +1,13 @@
+import type { FC } from 'react';
+import { useEffect, useRef } from 'react';
+
 import { commandsCtx } from '@milkdown/core';
-import { tooltipFactory, TooltipProvider } from '@milkdown/plugin-tooltip';
+import { TooltipProvider, tooltipFactory } from '@milkdown/plugin-tooltip';
 import { updateImageCommand } from '@milkdown/preset-commonmark';
 import { NodeSelection } from '@milkdown/prose/state';
 import { useInstance } from '@milkdown/react';
 import { usePluginViewContext } from '@prosemirror-adapter/react';
 import debounce from 'lodash.debounce';
-import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
 
 export const ImageTooltip: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -76,7 +77,10 @@ export const ImageTooltip: FC = () => {
 
   return (
     <div className="hidden">
-      <div ref={ref} className="flex w-96 flex-col gap-2 rounded border-gray-300 bg-white p-4 shadow ring dark:border-gray-600 dark:bg-black">
+      <div
+        ref={ref}
+        className="flex w-96 flex-col gap-2 rounded border-gray-300 bg-white p-4 shadow ring dark:border-gray-600 dark:bg-black"
+      >
         <label className="flex flex-row items-center justify-center gap-4">
           <span className="w-10">Link</span>
           <input
@@ -87,8 +91,7 @@ export const ImageTooltip: FC = () => {
               onChange('src', e);
             }, 2000)}
             type="text"
-            className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-indigo-300
-            focus:ring focus:ring-indigo-200/50 dark:bg-gray-600"
+            className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:bg-gray-600"
             defaultValue={src}
           />
         </label>
@@ -102,8 +105,7 @@ export const ImageTooltip: FC = () => {
               onChange('alt', e);
             }, 2000)}
             type="text"
-            className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-indigo-300
-            focus:ring focus:ring-indigo-200/50 dark:bg-gray-600"
+            className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:bg-gray-600"
             defaultValue={alt}
           />
         </label>
@@ -117,8 +119,7 @@ export const ImageTooltip: FC = () => {
               onChange('title', e);
             }, 2000)}
             type="text"
-            className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-indigo-300
-            focus:ring focus:ring-indigo-200/50 dark:bg-gray-600"
+            className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200/50 dark:bg-gray-600"
             defaultValue={title}
           />
         </label>

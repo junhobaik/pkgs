@@ -1,18 +1,17 @@
 #editorWrap,
 #editorWrap > div,
-#editorWrap > div > div.milkdown,
-#editorWrap > div > div.milkdown > div.editor {
+#editorWrap > div > div.milkdown {
   height: 100%;
   overflow: hidden;
 }
 
 #editorWrap > div > div.milkdown {
+  overflow-y: auto;
   padding-right: clamp(16px, calc(100% - 768px), calc(100% - 368px));
   background-color: #fbfbfb;
 }
 
 #editorWrap > div > div.milkdown > div.editor {
-  overflow-y: auto;
   margin-left: 32px;
   padding: 16px;
   background-color: #ffffff;
