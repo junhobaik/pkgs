@@ -1,4 +1,8 @@
-#editorWrap > div {
+#editorWrap,
+#editorWrap > div,
+#editorWrap > div > div.milkdown,
+#editorWrap > div > div.milkdown > div.editor {
+  height: 100%;
 }
 
 #editorWrap > div > div.milkdown {
