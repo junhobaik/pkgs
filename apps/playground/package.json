@@ -14,7 +14,8 @@
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.3",
-    "ui": "workspace:*"
+    "@junhobaik/ui": "workspace:*",
+    "@junhobaik/editor": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20",

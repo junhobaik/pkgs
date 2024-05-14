@@ -23,7 +23,23 @@
       "outputs": ["dist_sb/**"]
     },
 
+    "@junhobaik/editor#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+
+    "@junhobaik/editor#watch": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"],
+      "cache": false,
+      "persistent": true
+    },
+
     "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "watch": {
       "cache": false,
       "persistent": true
     }

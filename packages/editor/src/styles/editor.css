@@ -1,0 +1,14 @@
+#editorWrap > div {
+}
+
+#editorWrap > div > div.milkdown {
+  padding-right: clamp(16px, calc(100% - 768px), calc(100% - 368px));
+  background-color: #fbfbfb;
+}
+
+#editorWrap > div > div.milkdown > div.editor {
+  margin-left: 32px;
+  padding: 16px;
+  background-color: #ffffff;
+  max-width: 100%;
+}
