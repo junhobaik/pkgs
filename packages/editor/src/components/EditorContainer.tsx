@@ -7,12 +7,12 @@ import { MilkdownEditor, type MilkdownRef } from '@/components/MilkdownEditor';
 
 import { compose } from '@/utils/compose';
 
-import './styles/editor.css';
-import './styles/globals.css';
-import './styles/katex.css';
-import './styles/prism-node.css';
-import './styles/prose.css';
-import './styles/prosemirror.css';
+import '../styles/editor.css';
+import '../styles/globals.css';
+import '../styles/katex.css';
+import '../styles/prism-node.css';
+import '../styles/prose.css';
+import '../styles/prosemirror.css';
 
 const Provider = compose(MilkdownProvider, ProsemirrorAdapterProvider);
 
