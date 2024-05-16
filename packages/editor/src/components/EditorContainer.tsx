@@ -3,7 +3,8 @@ import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from '
 import { MilkdownProvider } from '@milkdown/react';
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/react';
 
-import { MilkdownEditor, type MilkdownRef } from '@/components';
+import { MilkdownEditor, type MilkdownRef } from '@/components/MilkdownEditor';
+
 import { compose } from '@/utils/compose';
 
 import './styles/editor.css';

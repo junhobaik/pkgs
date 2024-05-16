@@ -12,6 +12,7 @@
 }
 
 #editorWrap > div > div.milkdown > div.editor {
+  min-height: 100%;
   margin-left: 32px;
   padding: 16px;
   background-color: #ffffff;
