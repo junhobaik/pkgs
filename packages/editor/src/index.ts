@@ -1,3 +1,3 @@
-import Editor, { type EditorRef } from './components/EditorContainer';
+import Editor, { type EditorRef, type EditorToolbarItems } from './components/EditorContainer';
 
-export { Editor, EditorRef };
+export { Editor, EditorRef, EditorToolbarItems };

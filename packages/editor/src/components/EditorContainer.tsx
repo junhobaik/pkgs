@@ -26,6 +26,8 @@ interface EditorContainerProps {
   toolbarItems?: { icon: MaterialSymbol; onClick: () => void }[];
 }
 
+export type EditorToolbarItems = EditorContainerProps['toolbarItems'];
+
 export type EditorRef = MilkdownRef;
 
 const EditorContainer = forwardRef<EditorRef, EditorContainerProps>((props, ref) => {
