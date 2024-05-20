@@ -14,7 +14,11 @@ import '../styles/prism-node.css';
 import '../styles/prose.css';
 import '../styles/prosemirror.css';
 
-const Provider = compose(MilkdownProvider, ProsemirrorAdapterProvider);
+import { ProseStateProvider } from './ProseStateProvider';
+import { InspectorProvider } from './InspectorProvider';
+import Modal from './Modal';
+
+const Provider = compose(MilkdownProvider, ProsemirrorAdapterProvider, ProseStateProvider, InspectorProvider);
 
 interface EditorContainerProps {
   defaultValue: string;
@@ -50,11 +54,14 @@ const EditorContainer = forwardRef<EditorRef, EditorContainerProps>((props, ref)
   }));
 
   return (
-    <div id="pkg-editor" style={{ height: '100%' }}>
-      <Provider>
-        <MilkdownEditor milkdownRef={milkdownRef} content={content} onChange={onMilkdownChange} />
-      </Provider>
-    </div>
+    <>
+      <div id="pkg-editor" style={{ height: '100%' }}>
+        <Provider>
+          <MilkdownEditor milkdownRef={milkdownRef} content={content} onChange={onMilkdownChange} />
+        </Provider>
+      </div>
+      <div id="pkg-editor--modal-root" />
+    </>
   );
 });
 

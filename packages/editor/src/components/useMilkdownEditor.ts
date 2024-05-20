@@ -9,7 +9,7 @@ import { listener, listenerCtx } from '@milkdown/plugin-listener';
 import { prism, prismConfig } from '@milkdown/plugin-prism';
 import { trailing } from '@milkdown/plugin-trailing';
 import { upload } from '@milkdown/plugin-upload';
-import { codeBlockSchema, commonmark, listItemSchema } from '@milkdown/preset-commonmark';
+import { codeBlockSchema, commonmark, listItemSchema, imageSchema } from '@milkdown/preset-commonmark';
 import { useEditor } from '@milkdown/react';
 import { nord } from '@milkdown/theme-nord';
 import debounce from 'lodash.debounce';
@@ -31,18 +31,21 @@ import { diagram, diagramSchema } from '@milkdown/plugin-diagram';
 import { Diagram } from './editor-component/Diagram';
 import { block } from '@milkdown/plugin-block';
 import { Block } from './editor-component/Block';
+import { linkPlugin } from './editor-component/LinkWidget';
+import { useSetProseState } from './ProseStateProvider';
+import ImageBlock from './editor-component/ImageBlock';
 
 const useMilkdownEditor = (defaultValue: string, onChange: (markdown: string) => void) => {
   const nodeViewFactory = useNodeViewFactory();
   const setInspector = useSetInspector();
   const pluginViewFactory = usePluginViewFactory();
   const widgetViewFactory = useWidgetViewFactory();
+  const setProseState = useSetProseState();
 
   const slash = useSlash();
 
   const gfmPlugins: MilkdownPlugin[] = useMemo(() => {
     return [
-      gfm,
       tableTooltip,
       tableTooltipCtx,
       (ctx: Ctx) => async () => {
@@ -97,47 +100,55 @@ const useMilkdownEditor = (defaultValue: string, onChange: (markdown: string) =>
 
   const editorInfo = useEditor(
     (root) => {
-      return Editor.make()
-        .enableInspector()
-        .config((ctx) => {
-          ctx.update(editorViewOptionsCtx, (prev) => ({
-            ...prev,
-            attributes: {
-              // class: 'mx-auto px-2 py-4 box-border',
-            },
-          }));
-          ctx.set(rootCtx, root);
-          ctx.set(defaultValueCtx, defaultValue);
-          ctx.get(listenerCtx).markdownUpdated((_, markdown) => {
-            debounce(onChange, 100)(markdown);
-          });
-
-          ctx.update(prismConfig.key, (prev) => ({
-            ...prev,
-            configureRefractor: () => refractor,
-          }));
-          ctx.set(imageTooltip.key, {
-            view: pluginViewFactory({
-              component: ImageTooltip,
-            }),
-          });
-
-          slash.config(ctx);
-        })
-        .config(nord)
-        .use(commonmark)
-        .use(listener)
-        .use(clipboard)
-        .use(history)
-        .use(cursor)
-        .use(prism)
-        .use(indent)
-        .use(upload)
-        .use(trailing)
-        .use(imageTooltip)
-        .use(slash.plugins)
-        .use($view(listItemSchema.node, () => nodeViewFactory({ component: ListItem })))
-        .use($view(codeBlockSchema.node, () => nodeViewFactory({ component: CodeBlock })));
+      return (
+        Editor.make()
+          .enableInspector()
+          .config((ctx) => {
+            ctx.update(editorViewOptionsCtx, (prev) => ({
+              ...prev,
+              attributes: {
+                class: 'mx-auto px-2 py-4 box-border',
+              },
+            }));
+            ctx.set(rootCtx, root);
+            ctx.set(defaultValueCtx, defaultValue);
+            ctx
+              .get(listenerCtx)
+              .markdownUpdated((_, markdown) => {
+                debounce(onChange, 100)(markdown);
+              })
+              .updated((_, doc) => {
+                const state = doc.toJSON();
+                debounce(setProseState, 100)(state);
+              });
+            ctx.update(prismConfig.key, (prev) => ({
+              ...prev,
+              configureRefractor: () => refractor,
+            }));
+            // ctx.set(imageTooltip.key, {
+            //   view: pluginViewFactory({
+            //     component: ImageTooltip,
+            //   }),
+            // });
+            slash.config(ctx);
+          })
+          .config(nord)
+          .use(commonmark)
+          .use(linkPlugin(widgetViewFactory))
+          .use(listener)
+          .use(clipboard)
+          .use(history)
+          .use(cursor)
+          .use(prism)
+          .use(indent)
+          .use(upload)
+          .use(trailing)
+          // .use(imageTooltip)
+          .use(slash.plugins)
+          .use($view(listItemSchema.node, () => nodeViewFactory({ component: ListItem })))
+          .use($view(codeBlockSchema.node, () => nodeViewFactory({ component: CodeBlock })))
+          .use($view(imageSchema.node, () => nodeViewFactory({ component: ImageBlock })))
+      );
     },
     [onChange, defaultValue]
   );
