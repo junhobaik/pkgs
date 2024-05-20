@@ -13,10 +13,6 @@ const ImageBlock = (props: ImageBlockProps) => {
   const [srcValue, setSrcValue] = useState(node.attrs.src);
   const [altValue, setAltValue] = useState(node.attrs.alt);
 
-  useEffect(() => {
-    console.log('ImageBlock', props, nodeViewContext);
-  }, [props, nodeViewContext]);
-
   const setAttrsHandler = (key: 'src' | 'alt', value: string) => {
     setAttrs({ [key]: value });
   };
