@@ -16,19 +16,20 @@ import '../styles/prosemirror.css';
 
 import { ProseStateProvider } from './ProseStateProvider';
 import { InspectorProvider } from './InspectorProvider';
-import Modal from './Modal';
+import { MaterialSymbol } from 'material-symbols';
 
 const Provider = compose(MilkdownProvider, ProsemirrorAdapterProvider, ProseStateProvider, InspectorProvider);
 
 interface EditorContainerProps {
   defaultValue: string;
   onChange?: (markdown: string) => void;
+  toolbarItems?: { icon: MaterialSymbol; onClick: () => void }[];
 }
 
 export type EditorRef = MilkdownRef;
 
 const EditorContainer = forwardRef<EditorRef, EditorContainerProps>((props, ref) => {
-  const { defaultValue, onChange = () => {} } = props;
+  const { defaultValue, onChange = () => {}, toolbarItems } = props;
   const [content, setContent] = useState(defaultValue);
 
   const milkdownRef = useRef<EditorRef>(null);
@@ -57,7 +58,7 @@ const EditorContainer = forwardRef<EditorRef, EditorContainerProps>((props, ref)
     <>
       <div id="pkg-editor" style={{ height: '100%' }}>
         <Provider>
-          <MilkdownEditor milkdownRef={milkdownRef} content={content} onChange={onMilkdownChange} />
+          <MilkdownEditor milkdownRef={milkdownRef} content={content} onChange={onMilkdownChange} toolbarItems={toolbarItems} />
         </Provider>
       </div>
       <div id="pkg-editor--modal-root" />
