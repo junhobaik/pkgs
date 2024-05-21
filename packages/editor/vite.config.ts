@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 import tailwindcss from 'tailwindcss';
+import postcssPrefixSelector from 'postcss-prefix-selector';
 
 export default defineConfig({
   resolve: {
@@ -19,7 +20,20 @@ export default defineConfig({
   ],
   css: {
     postcss: {
-      plugins: [tailwindcss],
+      plugins: [
+        tailwindcss,
+        postcssPrefixSelector({
+          prefix: '',
+          transform(prefix, selector, prefixedSelector) {
+            const prefixes = ['#pkg-editor', '#tippy-1'];
+            if (selector.startsWith('html') || selector.startsWith('body') || selector.startsWith(':') || selector.startsWith('::')) {
+              return selector;
+            }
+
+            return prefixes.map((p) => `${p} ${selector}`).join(', ');
+          },
+        }),
+      ],
     },
     modules: {
       scopeBehaviour: 'local',

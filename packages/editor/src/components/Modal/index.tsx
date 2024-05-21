@@ -56,7 +56,7 @@ const Modal: React.FC<ModalProps> = (props) => {
   );
 
   if (portal) {
-    return ReactDOM.createPortal(modalContent, document.getElementById('pkg-editor--modal-root')!);
+    return ReactDOM.createPortal(modalContent, document.querySelector('#pkg-editor.modal-root')!);
   }
 
   return modalContent;

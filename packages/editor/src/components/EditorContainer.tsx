@@ -63,7 +63,7 @@ const EditorContainer = forwardRef<EditorRef, EditorContainerProps>((props, ref)
           <MilkdownEditor milkdownRef={milkdownRef} content={content} onChange={onMilkdownChange} toolbarItems={toolbarItems} />
         </Provider>
       </div>
-      <div id="pkg-editor--modal-root" />
+      <div id="pkg-editor" className="modal-root" />
     </>
   );
 });
