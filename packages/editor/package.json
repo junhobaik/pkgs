@@ -1,8 +1,8 @@
 {
   "name": "@junhobaik/editor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "rm -rf ./dist && tsc && vite build",
     "watch": "tsc && vite build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "dev": "vite dev",
