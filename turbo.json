@@ -37,8 +37,7 @@
       "cache": false,
       "persistent": true
     },
-    "storybook-build": {
-      "dependsOn": ["^build"],
+    "build-storybook": {
       "outputs": ["dist-sb/**"]
     }
   }
