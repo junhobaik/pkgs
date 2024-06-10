@@ -13,16 +13,6 @@
       "persistent": true
     },
 
-    "@junhobaik/ui#storybook": {
-      "cache": false,
-      "persistent": true
-    },
-
-    "@junhobaik/ui#storybook-build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist-sb/**"]
-    },
-
     "@junhobaik/editor#build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
@@ -42,6 +32,14 @@
     "watch": {
       "cache": false,
       "persistent": true
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
+    },
+    "storybook-build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist-sb/**"]
     }
   }
 }
