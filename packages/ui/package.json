@@ -11,11 +11,7 @@
     "prepublishOnly": "tsc && vite build"
   },
   "dependencies": {
-    "@vanilla-extract/css": "^1.14.0",
-    "@vanilla-extract/dynamic": "^2.1.0",
-    "@vanilla-extract/recipes": "^0.5.1",
-    "@vanilla-extract/vite-plugin": "^3.9.3",
-    "classnames": "^2.4.0",
+    "@react-aria/interactions": "^3.21.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -37,11 +33,15 @@
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.14",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-storybook": "^0.6.15",
+    "postcss": "^8.4.21",
     "storybook": "^7.6.6",
+    "tailwind-variants": "^0.2.1",
+    "tailwindcss": "^3.2.7",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-dts": "^3.6.4"
