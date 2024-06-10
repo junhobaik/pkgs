@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '.';
+import { Button } from '@junhobaik/ui';
 
 const meta = {
-  title: 'Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {
@@ -20,7 +19,7 @@ const meta = {
         required: true,
       },
     },
-    ref: { control: 'none' },
+    ref: {},
     fullWidth: {
       control: 'boolean',
       description: 'Full width button',
@@ -33,7 +32,6 @@ const meta = {
       description: 'Content at the start of the button',
     },
     endContent: {
-      control: 'element',
       description: 'Content at the end of the button',
     },
     isLoading: {
@@ -44,7 +42,7 @@ const meta = {
       },
     },
     spinner: {
-      control: 'element',
+      control: {},
       description: 'Custom spinner element',
     },
     spinnerPlacement: {
