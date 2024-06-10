@@ -1,27 +1,33 @@
 import React, { ElementType, MouseEventHandler, ReactElement, Ref, RefObject, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
-import { useDOMRef } from '../shared/hooks';
+import { useDOMRef } from '../../shared/hooks';
 import { button as buttonStyles } from './button.style';
 import { useHover } from '@react-aria/interactions';
 import { Spinner } from '../Spinner';
 
-type Colors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
-type Variants = 'solid' | 'bordered' | 'light' | 'flat' | 'faded' | 'shadow' | 'ghost';
-type Radius = 'none' | 'sm' | 'md' | 'lg' | 'full';
-type Size = 'sm' | 'md' | 'lg';
+export type ButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+export type ButtonVariants = 'solid' | 'bordered' | 'light' | 'flat' | 'faded' | 'shadow' | 'ghost';
+export type ButtonRadius = 'none' | 'sm' | 'md' | 'lg' | 'full';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export type UseButtonProps<T extends ElementType = 'button'> = {
   ref?: ReactRef<HTMLButtonElement | null>;
+  /**
+   * full width button
+   * @default false
+   */
   fullWidth?: boolean;
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
   isLoading?: boolean;
   spinner?: ReactElement;
   spinnerPlacement?: 'start' | 'end';
-  //
-  size?: Size;
-  radius?: Radius;
-  color?: Colors;
-  variant?: Variants;
+  /**
+   * Button size
+   */
+  size?: ButtonSize;
+  radius?: ButtonRadius;
+  color?: ButtonColors;
+  variant?: ButtonVariants;
 } & React.ComponentPropsWithRef<T>;
 
 export const useButton = <T extends ElementType = 'button'>(props: UseButtonProps<T> & { as?: T }) => {

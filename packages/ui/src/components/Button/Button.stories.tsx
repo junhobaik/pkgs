@@ -1,19 +1,89 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button, ButtonProps } from '.';
+import { Button } from '.';
 
 const meta = {
   title: 'Button',
   component: Button,
-  parameters: {
-    // layout: 'centered',
-  },
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    children: {
+      control: 'text',
+      table: {
+        required: true,
+      },
+    },
+    ref: { control: 'none' },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Full width button',
+      defaultValue: false,
+    },
+    startContent: {
+      control: 'element',
+      description: 'Content at the start of the button',
+    },
+    endContent: {
+      control: 'element',
+      description: 'Content at the end of the button',
+    },
+    isLoading: {
+      control: 'boolean',
+      description: 'Show loading spinner',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    spinner: {
+      control: 'element',
+      description: 'Custom spinner element',
+    },
+    spinnerPlacement: {
+      control: 'radio',
+      options: ['start', 'end'],
+      description: 'Placement of the spinner',
+      table: {
+        defaultValue: { summary: '"start"' },
+      },
+    },
+    size: {
+      control: 'radio',
+      options: ['sm', 'md', 'lg'],
+      description: 'Button size',
+      table: {
+        defaultValue: { summary: '"md"' },
+      },
+    },
+    radius: {
+      control: 'radio',
+      options: ['none', 'sm', 'md', 'lg', 'full'],
+      description: 'Button border radius',
+      table: {
+        defaultValue: { summary: '"md"' },
+      },
+    },
+    color: {
+      control: 'radio',
+      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger'],
+      description: 'Button color',
+      table: {
+        defaultValue: { summary: '"default"' },
+      },
+    },
+    variant: {
+      control: 'radio',
+      options: ['solid', 'bordered', 'light', 'flat', 'faded', 'shadow', 'ghost'],
+      description: 'Button variant',
+      table: {
+        defaultValue: { summary: '"solid"' },
+        type: { summary: `"solid" | "bordered" | "light" | "flat" | "faded" | "shadow" | "ghost"` },
+      },
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
@@ -192,10 +262,16 @@ export const Custom: Story = {
       <div className="">
         <p className="text-lg mb-1">Support TailwindCSS</p>
         <div className="">
-          <Button {...args} className="text-white border-4 bg-slate-400 border-slate-700">
-            Custom
-          </Button>
-          <pre className="ml-2 text-sm">// {`<Button className="text-white border-4 bg-slate-400 border-slate-700">Custom</Button>`}</pre>
+          <div className="flex items-center">
+            <Button {...args} className="text-slate-700 border-4 bg-slate-400 border-slate-700 mr-1">
+              Custom
+            </Button>
+            <Button {...args} className="text-slate-700 border-4 bg-slate-400 border-slate-700" isLoading={true}>
+              Custom
+            </Button>
+          </div>
+          <pre className="ml-2 text-sm mt-1">// {`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700 mr-1"> ...`}</pre>
+          <pre className="ml-2 text-sm">// {`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700" isLoading={true}> ...`}</pre>
         </div>
       </div>
     );

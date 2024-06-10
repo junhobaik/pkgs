@@ -11,6 +11,11 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+
+    tags: ['autodocs'],
+    docs: {
+      toc: true,
+    },
   },
 };
 
