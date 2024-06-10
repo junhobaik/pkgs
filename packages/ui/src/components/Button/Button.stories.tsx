@@ -6,6 +6,13 @@ const meta = {
   title: 'Button',
   component: Button,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'import { Button } from "@junhobaik/ui";',
+      },
+    },
+  },
   argTypes: {
     children: {
       control: 'text',
