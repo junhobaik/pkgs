@@ -7,7 +7,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev --ci -p 6006",
-    "build-storybook": "storybook build -o dist_sb",
+    "build-storybook": "storybook build -o dist-sb",
     "prepublishOnly": "tsc && vite build"
   },
   "dependencies": {
