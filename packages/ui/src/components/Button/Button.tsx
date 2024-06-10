@@ -1,4 +1,6 @@
-import { forwardRef, useEffect } from 'react';
+// Button.tsx
+
+import { forwardRef } from 'react';
 import { useButton, UseButtonProps } from './useButton';
 
 export interface ButtonProps extends UseButtonProps<'button'> {}
