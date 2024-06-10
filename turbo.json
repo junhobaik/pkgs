@@ -20,7 +20,7 @@
 
     "@junhobaik/ui#storybook-build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist_sb/**"]
+      "outputs": ["dist-sb/**"]
     },
 
     "@junhobaik/editor#build": {
