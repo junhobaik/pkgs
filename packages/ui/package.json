@@ -6,8 +6,6 @@
     "watch": "tsc && vite build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "storybook": "storybook dev --ci -p 6006",
-    "build-storybook": "storybook build -o dist-sb",
     "prepublishOnly": "tsc && vite build"
   },
   "dependencies": {
@@ -20,14 +18,6 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.1.6",
-    "@storybook/addon-interactions": "^8.1.6",
-    "@storybook/addon-links": "^8.1.6",
-    "@storybook/addon-onboarding": "^8.1.6",
-    "@storybook/blocks": "^8.1.6",
-    "@storybook/react": "^8.1.6",
-    "@storybook/react-vite": "^8.1.6",
-    "@storybook/test": "^8.1.6",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.12.0",
