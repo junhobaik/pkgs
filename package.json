@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "dependencies": {
-    "turbo": "^1.11.2"
+    "turbo": "^2.0.3"
   },
   "packageManager": "pnpm@8.11.0+sha1.01bf39424f1008f29012bbae851d2acb8a20a0d0"
 }
