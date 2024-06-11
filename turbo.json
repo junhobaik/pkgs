@@ -40,6 +40,11 @@
       "persistent": true
     },
 
+    "storybook#storybook": {
+      "dependsOn": ["@junhobaik/ui#build", "@junhobaik/editor#build"],
+      "cache": false,
+      "persistent": true
+    },
     "storybook#build-storybook": {
       "dependsOn": ["@junhobaik/ui#build", "@junhobaik/editor#build"],
       "outputs": ["dist-sb/**"]

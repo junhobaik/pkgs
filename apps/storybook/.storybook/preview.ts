@@ -1,7 +1,6 @@
 import type { Preview } from '@storybook/react';
 
 import '../tailwind.css';
-import '@junhobaik/ui/css';
 
 const preview: Preview = {
   parameters: {
@@ -16,6 +15,12 @@ const preview: Preview = {
     tags: ['autodocs'],
     docs: {
       toc: true,
+    },
+
+    options: {
+      storySort: {
+        order: ['ui', 'editor', '*'],
+      },
     },
   },
 };
