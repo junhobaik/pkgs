@@ -8,8 +8,8 @@ import { Spinner } from '../Spinner';
 
 export type ButtonColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
 export type ButtonVariants = 'solid' | 'bordered' | 'light' | 'flat' | 'faded' | 'shadow' | 'ghost';
-export type ButtonRadius = 'none' | 'sm' | 'md' | 'lg' | 'full';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonRadius = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full';
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type UseButtonProps<T extends ElementType = 'button'> = {
   ref?: ReactRef<HTMLButtonElement | null>;

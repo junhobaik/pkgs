@@ -160,6 +160,9 @@ export const Size: Story = {
   render: (args) => {
     return (
       <div className="flex flex-wrap">
+        <Button color="primary" {...args} className="m-1" size="xs">
+          X-Small
+        </Button>
         <Button color="primary" {...args} className="m-1" size="sm">
           Small
         </Button>
@@ -168,6 +171,9 @@ export const Size: Story = {
         </Button>
         <Button color="primary" {...args} className="m-1" size="lg">
           Large
+        </Button>
+        <Button color="primary" {...args} className="m-1" size="xl">
+          X-Large
         </Button>
       </div>
     );
@@ -189,6 +195,15 @@ export const Radius: Story = {
         </Button>
         <Button color="primary" {...args} className="m-1" radius="lg">
           Large
+        </Button>
+        <Button color="primary" {...args} className="m-1" radius="xl">
+          X-Large
+        </Button>
+        <Button color="primary" {...args} className="m-1" radius="2xl">
+          2X-Large
+        </Button>
+        <Button color="primary" {...args} className="m-1" radius="3xl">
+          3X-Large
         </Button>
         <Button color="primary" {...args} className="m-1" radius="full">
           Full

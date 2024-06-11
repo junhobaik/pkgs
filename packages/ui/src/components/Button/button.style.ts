@@ -34,9 +34,11 @@ export const button = tv({
       ghost: '',
     },
     size: {
-      sm: 'px-3 min-w-16 h-8 text-[0.9rem] gap-2',
-      md: 'px-4 min-w-20 h-10 text-[1rem] gap-2',
-      lg: 'px-6 min-w-24 h-12 text-[1.1rem] gap-3',
+      xs: 'px-[12px] min-w-12 h-[32px] text-[0.8rem] gap-2',
+      sm: 'px-[16px] min-w-16 h-[36px] text-[0.9rem] gap-2',
+      md: 'px-[16px] min-w-20 h-[40px] text-[1rem] gap-2',
+      lg: 'px-[18px] min-w-24 h-[44px] text-[1.1rem] gap-3',
+      xl: 'px-[20px] min-w-24 h-[48px] text-[1.2rem] gap-3',
     },
     color: {
       default: '',
@@ -50,7 +52,10 @@ export const button = tv({
       none: 'rounded-none',
       sm: 'rounded-sm',
       md: 'rounded-md',
-      lg: 'rounded-[0.8rem]',
+      lg: 'rounded-lg',
+      xl: 'rounded-xl',
+      '2xl': 'rounded-2xl',
+      '3xl': 'rounded-3xl',
       full: 'rounded-full',
     },
     fullWidth: {
@@ -65,6 +70,33 @@ export const button = tv({
     },
   },
   compoundVariants: [
+    // horizontal padding / radius / size
+    {
+      radius: 'full',
+      size: 'xs',
+      class: 'px-[14px]',
+    },
+    {
+      radius: 'full',
+      size: 'sm',
+      class: 'px-[18px]',
+    },
+    {
+      radius: 'full',
+      size: 'md',
+      class: 'px-[18px]',
+    },
+    {
+      radius: 'full',
+      size: 'lg',
+      class: 'px-[20px]',
+    },
+    {
+      radius: 'full',
+      size: 'xl',
+      class: 'px-[22px]',
+    },
+
     // solid / color
     {
       variant: 'solid',
