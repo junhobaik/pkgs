@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '@junhobaik/ui';
 import '@junhobaik/ui/css';
+import { CodeBlock } from '@/components';
 
 const meta = {
   component: Button,
@@ -259,7 +260,7 @@ export const Loading: Story = {
             <Button {...args} isLoading={true} spinner={<div>loading...</div>}>
               Custom
             </Button>
-            <pre className="ml-2 text-sm">// {`<Button isLoading={true} spinnerElement={<div>loading...</div>}>`}</pre>
+            <CodeBlock code={`<Button isLoading={true} spinnerElement={<div>loading...</div>}>`} lang="javascript" className="mt-2" />
           </div>
         </div>
       </div>
@@ -293,8 +294,9 @@ export const Custom: Story = {
               Custom
             </Button>
           </div>
-          <pre className="ml-2 text-sm mt-1">// {`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700 mr-1"> ...`}</pre>
-          <pre className="ml-2 text-sm">// {`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700" isLoading={true}> ...`}</pre>
+
+          <CodeBlock code={`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700 mr-1"> ...`} lang="javascript" className="mt-2" />
+          <CodeBlock code={`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700" isLoading={true}> ...`} lang="javascript" className="mt-2" />
         </div>
       </div>
     );
