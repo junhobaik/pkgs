@@ -1,15 +1,14 @@
 // Button.tsx
 
 import { forwardRef } from 'react';
-import { useButton, UseButtonProps } from './useButton';
-
-export interface ButtonProps extends UseButtonProps<'button'> {}
+import { useButton } from './useButton';
+import { type ButtonProps } from './button.type';
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { Component, children, domRef, styles, startContent, endContent, isLoading, spinnerPlacement, spinner, ...buttonProps } = useButton({ ...props, ref });
+  const { Component, children, domRef, styles, startContent, endContent, isLoading, spinnerPlacement, spinner, getButtonProps } = useButton({ ...props, ref });
 
   return (
-    <Component {...buttonProps} className={styles} ref={domRef}>
+    <Component {...getButtonProps()} className={styles} ref={domRef}>
       {startContent}
       {isLoading && spinnerPlacement === 'start' && spinner}
       {children}
