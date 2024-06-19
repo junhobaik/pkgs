@@ -14,7 +14,7 @@ export default defineConfig({
     minify: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'index',
+      name: 'ui',
       fileName: 'index',
     },
     rollupOptions: {
