@@ -34,9 +34,9 @@ const ariaRe = /^(aria-.*)$/;
 const funcRe = /^(on[A-Z].*)$/;
 
 /**
- * Filters out all props that aren't valid DOM props or defined via override prop obj.
- * @param props - The component props to be filtered.
- * @param opts - Props to override.
+ * 유효한 DOM 속성 또는 재정의 속성 객체에 정의된 속성이 아닌 모든 속성을 필터링합니다.
+ * @param props - 필터링할 컴포넌트 속성입니다.
+ * @param opts - 재정의할 속성입니다.
  */
 export const filterDOMProps = (props: DOMProps & AriaLabelingProps, opts: Options = {}): DOMProps & AriaLabelingProps => {
   let { labelable = true, enabled = true, propNames, omitPropNames, omitEventNames, omitDataProps, omitEventProps } = opts;
