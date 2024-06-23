@@ -55,6 +55,10 @@ export type UseButtonProps<T extends ElementType = 'button'> = {
    * 버튼 변형 스타일
    */
   variant?: ButtonVariants;
+  /**
+   * onClick debounce
+   */
+  debounce?: number | boolean;
 } & React.ComponentPropsWithRef<T>;
 
 /**

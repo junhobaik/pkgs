@@ -6,6 +6,7 @@ import { button as buttonStyles } from './button.style';
 import { Spinner } from '../Spinner';
 import { filterDOMProps } from '../../shared/utils';
 import { UseButtonProps } from './button.type';
+import { debounce as debounceFunc } from 'lodash-es';
 
 export const useButton = <T extends ElementType = 'button'>(props: UseButtonProps<T> & { as?: T }) => {
   const {
@@ -25,6 +26,7 @@ export const useButton = <T extends ElementType = 'button'>(props: UseButtonProp
     fullWidth,
     startContent,
     endContent,
+    debounce = false,
   } = props;
 
   const domRef = useDOMRef(ref);
@@ -39,11 +41,13 @@ export const useButton = <T extends ElementType = 'button'>(props: UseButtonProp
     [disabled, domRef, onClick]
   );
 
+  const debouncedClick = useMemo(() => debounceFunc(handleClick, typeof debounce === 'number' ? debounce : 300, { leading: true, trailing: false }), [handleClick, debounce]);
+
   const getButtonProps = useCallback(() => {
     const filteredProps = filterDOMProps(
       {
         ...props,
-        onClick: handleClick,
+        onClick: debounce ? debouncedClick : handleClick,
       },
       { enabled: true }
     );
