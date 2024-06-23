@@ -17,6 +17,9 @@
       "dependsOn": ["@junhobaik/ui#build", "@junhobaik/editor#build"],
       "outputs": ["dist-sb/**"]
     },
+    "publish": {
+      "dependsOn": ["^build"]
+    },
 
     "@junhobaik/ui#build": {
       "dependsOn": ["^build"],
@@ -27,6 +30,10 @@
       "outputs": ["dist/**"],
       "cache": false,
       "persistent": true
+    },
+    "@junhobaik/ui#publish": {
+      "dependsOn": ["^@junhobaik/ui#build", "^@junhobaik/editor#build"],
+      "outputs": ["dist/**"]
     },
 
     "@junhobaik/editor#build": {
@@ -41,12 +48,12 @@
     },
 
     "storybook#storybook": {
-      "dependsOn": ["@junhobaik/ui#build", "@junhobaik/editor#build"],
+      "dependsOn": ["^@junhobaik/ui#build", "^@junhobaik/editor#build"],
       "cache": false,
       "persistent": true
     },
     "storybook#build-storybook": {
-      "dependsOn": ["@junhobaik/ui#build", "@junhobaik/editor#build"],
+      "dependsOn": ["^@junhobaik/ui#build", "^@junhobaik/editor#build"],
       "outputs": ["dist-sb/**"]
     }
   }
