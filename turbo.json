@@ -18,7 +18,8 @@
       "outputs": ["dist-sb/**"]
     },
     "publish": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "cache": false
     },
 
     "@junhobaik/ui#build": {
@@ -33,7 +34,8 @@
     },
     "@junhobaik/ui#publish": {
       "dependsOn": ["^@junhobaik/ui#build", "^@junhobaik/editor#build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**"],
+      "cache": false
     },
 
     "@junhobaik/editor#build": {
