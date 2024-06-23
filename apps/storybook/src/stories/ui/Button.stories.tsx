@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@junhobaik/ui';
 import '@junhobaik/ui/css';
 import { CodeBlock } from '@/components';
+import { fn } from '@storybook/test';
+import { useState } from '@storybook/preview-api';
 
 const meta = {
   component: Button,
@@ -13,6 +15,12 @@ const meta = {
         component: 'import { Button } from "@junhobaik/ui";',
       },
     },
+    actions: {
+      handles: ['mouseover', 'click .btn'],
+    },
+  },
+  args: {
+    onClick: fn(),
   },
   argTypes: {
     children: {
@@ -22,10 +30,26 @@ const meta = {
       },
     },
     ref: {},
+    onClick: {
+      action: 'clicked',
+      description: 'Button click event',
+    },
+    debounce: {
+      control: 'number',
+      // @ts-expect-error
+      type: 'boolean | number',
+      description: 'onClick event, Debounce wait time (ms)',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+
     fullWidth: {
       control: 'boolean',
       description: 'Full width button',
-      defaultValue: false,
+      table: {
+        defaultValue: { summary: 'false' },
+      },
     },
     startContent: {
       control: {
@@ -97,6 +121,30 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
   args: {
     children: 'Button',
+  },
+};
+
+export const Debounce: Story = {
+  args: {
+    color: 'primary',
+  },
+  render: (args) => {
+    const [count, setCount] = useState(0);
+
+    return (
+      <div>
+        <Button
+          {...args}
+          debounce={1000}
+          onClick={() => {
+            setCount((prev) => prev + 1);
+            console.log('clicked');
+          }}
+        >
+          [Count: {count}] Count Up / (debounce: 1000)
+        </Button>
+      </div>
+    );
   },
 };
 
