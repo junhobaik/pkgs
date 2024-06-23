@@ -22,16 +22,20 @@ export const useButton = <T extends ElementType = 'button'>(props: UseButtonProp
     spinnerPlacement = 'start',
     spinner,
     size,
-    className = '',
-    fullWidth,
     startContent,
     endContent,
+    fullWidth = false,
     debounce = false,
+    scalable = false,
+    className = '',
   } = props;
 
   const domRef = useDOMRef(ref);
 
-  const styles = useMemo(() => buttonStyles({ radius, disabled, variant, color, size, fullWidth, class: className }), [radius, disabled, color, size, className, fullWidth]);
+  const styles = useMemo(
+    () => buttonStyles({ radius, disabled, variant, color, size, fullWidth, scalable, class: className }),
+    [radius, disabled, color, size, className, fullWidth, scalable]
+  );
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {

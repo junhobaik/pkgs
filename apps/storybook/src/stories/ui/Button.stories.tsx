@@ -51,6 +51,15 @@ const meta = {
         defaultValue: { summary: 'false' },
       },
     },
+
+    scalable: {
+      control: 'boolean',
+      description: 'Button click, shrink animation',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+
     startContent: {
       control: {
         type: 'object',
@@ -322,6 +331,18 @@ export const FullWidth: Story = {
       <div className="">
         <Button color="primary" {...args} fullWidth>
           Full Width
+        </Button>
+      </div>
+    );
+  },
+};
+
+export const Scalable: Story = {
+  render: (args) => {
+    return (
+      <div className="">
+        <Button color="primary" {...args} scalable>
+          Scalable
         </Button>
       </div>
     );

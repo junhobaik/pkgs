@@ -22,6 +22,7 @@ export const button = tv({
     'outline-none',
     'hover:opacity-90',
     'active:opacity-80',
+    'scale-100',
   ],
   variants: {
     variant: {
@@ -64,9 +65,8 @@ export const button = tv({
     disabled: {
       true: 'opacity-disabled pointer-events-none',
     },
-    disableAnimation: {
-      true: '!transition-none',
-      false: 'transition-transform-colors-opacity motion-reduce:transition-none',
+    scalable: {
+      true: 'transform transition-transform duration-100 active:scale-[0.97]',
     },
   },
   compoundVariants: [

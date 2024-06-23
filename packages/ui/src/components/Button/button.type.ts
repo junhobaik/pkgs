@@ -59,6 +59,10 @@ export type UseButtonProps<T extends ElementType = 'button'> = {
    * onClick debounce
    */
   debounce?: number | boolean;
+  /**
+   * 버튼 클릭, 축소 애니메이션 활성화 여부
+   */
+  scalable?: boolean;
 } & React.ComponentPropsWithRef<T>;
 
 /**
