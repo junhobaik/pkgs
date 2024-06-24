@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@junhobaik/ui';
 import '@junhobaik/ui/css';
 import { CodeBlock } from '@/components';
-import { fn } from '@storybook/test';
 import { useState } from '@storybook/preview-api';
 
 const meta = {
@@ -15,32 +14,32 @@ const meta = {
         component: 'import { Button } from "@junhobaik/ui";',
       },
     },
-    actions: {
-      handles: ['mouseover', 'click .btn'],
-    },
-  },
-  args: {
-    onClick: fn(),
   },
   argTypes: {
     children: {
       control: 'text',
       table: {
-        required: true,
+        category: 'required',
+        type: { summary: 'ReactNode' },
       },
     },
-    ref: {},
     onClick: {
-      action: 'clicked',
-      description: 'Button click event',
+      table: {
+        category: 'optional',
+      },
+    },
+    ref: {
+      table: {
+        category: 'optional',
+      },
     },
     debounce: {
       control: 'number',
-      // @ts-expect-error
-      type: 'boolean | number',
       description: 'onClick event, Debounce wait time (ms)',
       table: {
+        category: 'optional',
         defaultValue: { summary: 'false' },
+        type: { summary: `true | false` },
       },
     },
 
@@ -48,75 +47,101 @@ const meta = {
       control: 'boolean',
       description: 'Full width button',
       table: {
+        category: 'optional',
         defaultValue: { summary: 'false' },
       },
+      type: 'boolean',
     },
 
     scalable: {
       control: 'boolean',
       description: 'Button click, shrink animation',
       table: {
+        category: 'optional',
         defaultValue: { summary: 'false' },
+        type: { summary: `true | false` },
       },
     },
 
     startContent: {
-      control: {
-        type: 'object',
-      },
       description: 'Content at the start of the button',
+      table: {
+        category: 'optional',
+        defaultValue: { summary: 'undefined' },
+        type: { summary: `ReactNode` },
+      },
     },
     endContent: {
       description: 'Content at the end of the button',
+      table: {
+        category: 'optional',
+        defaultValue: { summary: 'undefined' },
+        type: { summary: `ReactNode` },
+      },
     },
     isLoading: {
       control: 'boolean',
       description: 'Show loading spinner',
       table: {
+        category: 'optional',
         defaultValue: { summary: 'false' },
       },
+      type: 'boolean',
     },
     spinner: {
-      control: {},
       description: 'Custom spinner element',
+      table: {
+        category: 'optional',
+        defaultValue: { summary: 'undefined' },
+        type: { summary: `ReactElement` },
+      },
     },
     spinnerPlacement: {
       control: 'radio',
       options: ['start', 'end'],
       description: 'Placement of the spinner',
       table: {
+        category: 'optional',
         defaultValue: { summary: '"start"' },
+        type: { summary: `"start" | "end"` },
       },
     },
     size: {
-      control: 'radio',
-      options: ['sm', 'md', 'lg'],
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
       description: 'Button size',
       table: {
+        category: 'optional',
         defaultValue: { summary: '"md"' },
+        type: { summary: `'xs' | 'sm' | 'md' | 'lg' | 'xl'` },
       },
     },
     radius: {
-      control: 'radio',
+      control: 'select',
       options: ['none', 'sm', 'md', 'lg', 'full'],
       description: 'Button border radius',
       table: {
+        category: 'optional',
         defaultValue: { summary: '"md"' },
+        type: { summary: `'none' | 'sm' | 'md' | 'lg' | 'full'` },
       },
     },
     color: {
-      control: 'radio',
+      control: 'select',
       options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger'],
       description: 'Button color',
       table: {
+        category: 'optional',
         defaultValue: { summary: '"default"' },
+        type: { summary: `'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'` },
       },
     },
     variant: {
-      control: 'radio',
+      control: 'select',
       options: ['solid', 'bordered', 'light', 'flat', 'faded', 'shadow', 'ghost'],
       description: 'Button variant',
       table: {
+        category: 'optional',
         defaultValue: { summary: '"solid"' },
         type: { summary: `"solid" | "bordered" | "light" | "flat" | "faded" | "shadow" | "ghost"` },
       },
@@ -147,7 +172,6 @@ export const Debounce: Story = {
           debounce={1000}
           onClick={() => {
             setCount((prev) => prev + 1);
-            console.log('clicked');
           }}
         >
           [Count: {count}] Count Up / (debounce: 1000)
