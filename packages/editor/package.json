@@ -1,6 +1,6 @@
 {
   "name": "@junhobaik/editor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "scripts": {
     "build": "rm -rf ./dist && tsc && vite build",
     "watch": "tsc && vite build --watch",
