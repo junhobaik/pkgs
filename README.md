@@ -1,8 +1,5 @@
 # junhobaik/pkgs
 
-> [!IMPORTANT]  
-> These packages are private and cannot be used without a token.
-
 ### **Storybook**
 
 **[🔗 https://pkgs-storybook.vercel.app](https://pkgs-storybook.vercel.app)**
