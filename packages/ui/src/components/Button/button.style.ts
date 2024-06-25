@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants';
-import { colorVariants } from '../../shared/styles';
+import { colorVariants } from './etc/colorVariants';
 
 export const button = tv({
   base: [

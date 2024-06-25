@@ -1,1 +1,0 @@
-export { colorVariants } from './variants';
