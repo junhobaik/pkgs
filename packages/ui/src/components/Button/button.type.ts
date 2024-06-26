@@ -10,6 +10,7 @@ export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
  * @template T extends ElementType
  */
 export type UseButtonProps<T extends ElementType = 'button'> = {
+  as?: string;
   /**
    * 버튼의 참조 객체
    */
