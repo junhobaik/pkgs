@@ -8,5 +8,5 @@
 
 | Package             | version |
 | ------------------- | ------- |
-| `@junhobaik/ui`     | 0.0.4   |
-| `@junhobaik/editor` | 0.1.2   |
+| `@junhobaik/ui`     | 0.0.7   |
+| `@junhobaik/editor` | 0.1.3   |
