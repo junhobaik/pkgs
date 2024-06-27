@@ -33,6 +33,24 @@ const meta = {
         category: 'optional',
       },
     },
+    as: {
+      control: 'text',
+      description: 'Button as',
+      table: {
+        category: 'optional',
+        defaultValue: { summary: '"button"' },
+        type: { summary: `ElementType` },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Button disabled',
+      table: {
+        category: 'optional',
+        defaultValue: { summary: 'false' },
+      },
+      type: 'boolean',
+    },
     debounce: {
       control: 'number',
       description: 'onClick event, Debounce wait time (ms)',
@@ -391,6 +409,18 @@ export const Custom: Story = {
           <CodeBlock code={`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700 mr-1"> ...`} lang="javascript" className="mt-2" />
           <CodeBlock code={`<Button className="text-slate-700 border-4 bg-slate-400 border-slate-700" isLoading={true}> ...`} lang="javascript" className="mt-2" />
         </div>
+      </div>
+    );
+  },
+};
+
+export const As: Story = {
+  render: (args) => {
+    return (
+      <div className="">
+        <Button color="primary" {...args} as="a" href="#">
+          as "a tag"
+        </Button>
       </div>
     );
   },

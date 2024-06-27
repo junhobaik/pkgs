@@ -1,3 +1,5 @@
+// src/components/Button/index.tsx
+
 import Button from './Button';
 
 export type * from './button.type';

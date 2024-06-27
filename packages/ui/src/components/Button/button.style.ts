@@ -1,3 +1,5 @@
+// src/components/Button/button.style.ts
+
 import { tv } from 'tailwind-variants';
 import { colorVariants } from './etc/colorVariants';
 
@@ -315,12 +317,5 @@ export const button = tv({
       class: colorVariants.ghost.danger,
     },
   ],
-  defaultVariants: {
-    size: 'md',
-    variant: 'solid',
-    color: 'default',
-    radius: 'lg',
-    fullWidth: false,
-    disabled: false,
-  },
+  defaultVariants: {},
 });
