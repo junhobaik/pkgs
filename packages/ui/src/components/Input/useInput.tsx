@@ -1,4 +1,6 @@
-import { ElementType, useEffect, useMemo, useState } from 'react';
+// src/components/Input/useInput.tsx
+
+import { ElementType, useEffect, useMemo, useState, useCallback } from 'react';
 import { UseInputProps } from './input.type';
 import { Spinner } from '../Spinner';
 import { useDOMRef } from '../../shared/hooks';
@@ -15,7 +17,7 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     size = 'md',
     radius = 'lg',
     color = 'default',
-    variant = 'solid',
+    variant = 'bordered',
     fullWidth = false,
 
     spinner,
@@ -25,28 +27,64 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     endContent,
 
     className = '',
+    containerClassName = '',
 
     validate,
     onClick,
     value,
+    onFocus,
+    onBlur,
   } = props;
+
+  const [isFocused, setIsFocused] = useState(false);
 
   const domRef = useDOMRef(null);
   const inputRef = useDOMRef(ref as ReactRef<HTMLInputElement>);
 
   const inputStyles = useMemo(() => _inputStyles({ class: className }), [className]);
-  const containerStyles = useMemo(() => _containerStyles({ class: '' }), []);
+  const containerStyles = useMemo(
+    () =>
+      _containerStyles({
+        variant,
+        size,
+        color,
+        radius,
+        fullWidth,
+        disabled,
+        class: containerClassName,
+        isFocused,
+      }),
+    [variant, size, color, radius, fullWidth, disabled, containerClassName, isFocused]
+  );
+
+  const handleInputFocus = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocused(true);
+      onFocus?.(e);
+    },
+    [onFocus]
+  );
+
+  const handleInputBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocused(false);
+      onBlur?.(e);
+    },
+    [onBlur]
+  );
 
   const handleContainerClick = (e: React.MouseEvent<HTMLElementType<T>, MouseEvent>) => {
     inputRef.current?.focus();
+    setIsFocused(true);
     onClick?.(e);
   };
 
-  const handleInputClick = (e: React.MouseEvent<HTMLElementType<T>, MouseEvent>) => {};
+  const handleInputClick = (e: React.MouseEvent<HTMLElementType<T>, MouseEvent>) => {
+    setIsFocused(true);
+  };
 
   const parsedValue = useMemo(() => {
     // TODO: validate
-
     return value;
   }, [value, validate]);
 
@@ -64,7 +102,12 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
 
   const getInputProps = () => {
     const filteredProps = filterDOMProps({ ...(props as any), value: parsedValue }, { enabled: true });
-    return { ...filteredProps, onClick: handleInputClick };
+    return {
+      ...filteredProps,
+      onClick: handleInputClick,
+      onFocus: handleInputFocus,
+      onBlur: handleInputBlur,
+    };
   };
 
   const Component = as || 'div';
@@ -84,5 +127,6 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     containerStyles,
     onClickContainer: handleContainerClick,
     onClickInput: handleInputClick,
+    isFocused, // 새로 추가된 부분
   };
 };

@@ -1,79 +1,44 @@
-const solid = {
-  default: 'bg-gray-200 text-gray-800',
-  primary: 'bg-blue-500 text-white',
-  secondary: 'bg-purple-500 text-white',
-  success: 'bg-green-500 text-white',
-  warning: 'bg-yellow-500 text-white',
-  danger: 'bg-red-500 text-white',
-  foreground: 'bg-white text-black',
-};
-
-const shadow = {
-  default: 'shadow-lg shadow-gray-200/50 bg-gray-200 text-gray-800',
-  primary: 'shadow-lg shadow-blue-500/40 bg-blue-500 text-white',
-  secondary: 'shadow-lg shadow-purple-500/40 bg-purple-500 text-white',
-  success: 'shadow-lg shadow-green-500/40 bg-green-500 text-white',
-  warning: 'shadow-lg shadow-yellow-500/40 bg-yellow-500 text-white',
-  danger: 'shadow-lg shadow-red-500/40 bg-red-500 text-white',
-  foreground: 'shadow-lg shadow-white/40 bg-white text-black',
-};
+// src/components/Input/etc/colorVariants.ts
 
 const bordered = {
-  default: 'bg-transparent border-[2px] border-gray-200 text-gray-800',
-  primary: 'bg-transparent border-[2px] border-blue-500 text-blue-500',
-  secondary: 'bg-transparent border-[2px] border-purple-500 text-purple-500',
-  success: 'bg-transparent border-[2px] border-green-500 text-green-500',
-  warning: 'bg-transparent border-[2px] border-yellow-500 text-yellow-500',
-  danger: 'bg-transparent border-[2px] border-red-500 text-red-500',
-  foreground: 'bg-transparent border-[2px] border-white text-black',
+  default: 'border border-gray-300 focus:border-gray-500 text-gray-900',
+  primary: 'border border-blue-300 focus:border-blue-600 text-blue-900',
+  secondary: 'border border-purple-300 focus:border-purple-600 text-purple-900',
+  success: 'border border-green-300 focus:border-green-600 text-green-900',
+  warning: 'border border-yellow-300 focus:border-yellow-600 text-yellow-900',
+  danger: 'border border-red-300 focus:border-red-600 text-red-900',
 };
 
 const flat = {
-  default: 'bg-gray-200/40 text-gray-800',
-  primary: 'bg-blue-500/20 text-blue-500',
-  secondary: 'bg-purple-500/20 text-purple-500',
-  success: 'bg-green-500/20 text-green-600 dark:text-green-500',
-  warning: 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-500',
-  danger: 'bg-red-500/20 text-red-600 dark:text-red-500',
-  foreground: 'bg-white/10 text-black',
+  default: 'bg-gray-100 focus:bg-gray-200 text-gray-900',
+  primary: 'bg-blue-100 focus:bg-blue-200 text-blue-900',
+  secondary: 'bg-purple-100 focus:bg-purple-200 text-purple-900',
+  success: 'bg-green-100 focus:bg-green-200 text-green-900',
+  warning: 'bg-yellow-100 focus:bg-yellow-200 text-yellow-900',
+  danger: 'bg-red-100 focus:bg-red-200 text-red-900',
+};
+
+const underlined = {
+  default: 'border-b border-gray-300 focus:border-gray-500 text-gray-900',
+  primary: 'border-b border-blue-300 focus:border-blue-600 text-blue-900',
+  secondary: 'border-b border-purple-300 focus:border-purple-600 text-purple-900',
+  success: 'border-b border-green-300 focus:border-green-600 text-green-900',
+  warning: 'border-b border-yellow-300 focus:border-yellow-600 text-yellow-900',
+  danger: 'border-b border-red-300 focus:border-red-600 text-red-900',
 };
 
 const faded = {
-  default: 'border border-gray-200 bg-gray-200 text-gray-800',
-  primary: 'border border-gray-100 bg-gray-100 text-blue-500',
-  secondary: 'border border-gray-100 bg-gray-100 text-purple-500',
-  success: 'border border-gray-100 bg-gray-100 text-green-500',
-  warning: 'border border-gray-100 bg-gray-100 text-yellow-500',
-  danger: 'border border-gray-100 bg-gray-100 text-red-500',
-  foreground: 'border border-gray-100 bg-gray-100 text-black',
-};
-
-const light = {
-  default: 'bg-transparent hover:bg-gray-200/40 text-gray-800',
-  primary: 'bg-transparent hover:bg-blue-500/20 text-blue-500',
-  secondary: 'bg-transparent hover:bg-purple-500/20 text-purple-500',
-  success: 'bg-transparent hover:bg-green-500/20 text-green-500',
-  warning: 'bg-transparent hover:bg-yellow-500/20 text-yellow-500',
-  danger: 'bg-transparent hover:bg-red-500/20 text-red-500',
-  foreground: 'bg-transparent hover:bg-white/10 text-black',
-};
-
-const ghost = {
-  default: 'border-[2px] border-gray-200 text-gray-800 hover:bg-gray-200',
-  primary: 'border-[2px] border-blue-500 text-blue-500 hover:text-white hover:bg-blue-500',
-  secondary: 'border-[2px] border-purple-500 text-purple-500 hover:text-white hover:bg-purple-500',
-  success: 'border-[2px] border-green-500 text-green-500 hover:text-white hover:bg-green-500',
-  warning: 'border-[2px] border-yellow-500 text-yellow-500 hover:text-white hover:bg-yellow-500',
-  danger: 'border-[2px] border-red-500 text-red-500 hover:text-white hover:bg-red-500',
-  foreground: 'border-[2px] border-white text-black hover:bg-white',
+  default: 'bg-gray-50 border border-gray-200 focus:bg-gray-100 focus:border-gray-300 text-gray-900',
+  primary: 'bg-blue-50 border border-blue-200 focus:bg-blue-100 focus:border-blue-300 text-blue-900',
+  secondary: 'bg-purple-50 border border-purple-200 focus:bg-purple-100 focus:border-purple-300 text-purple-900',
+  success: 'bg-green-50 border border-green-200 focus:bg-green-100 focus:border-green-300 text-green-900',
+  warning: 'bg-yellow-50 border border-yellow-200 focus:bg-yellow-100 focus:border-yellow-300 text-yellow-900',
+  danger: 'bg-red-50 border border-red-200 focus:bg-red-100 focus:border-red-300 text-red-900',
 };
 
 export const colorVariants = {
-  solid,
-  shadow,
   bordered,
   flat,
+  underlined,
   faded,
-  light,
-  ghost,
 };

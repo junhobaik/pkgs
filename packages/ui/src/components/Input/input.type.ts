@@ -2,8 +2,8 @@
 
 import { ComponentPropsWithRef, ElementType, ReactElement, Ref } from 'react';
 
-export type InputColors = 'default';
-export type InputVariants = 'bordered' | 'flat';
+export type InputColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+export type InputVariants = 'bordered' | 'flat' | 'underlined' | 'faded';
 export type InputRadius = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full';
 export type InputSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type InputSpinnerPlacement = 'start' | 'end';
@@ -90,6 +90,12 @@ export type UseInputProps<T extends ElementType> = {
 
   /** 인풋 클릭 시 실행될 콜백 함수 */
   onClick?: (e: React.MouseEvent<HTMLElementType<T>, MouseEvent>) => void;
+
+  /** 인풋 포커스 시 실행될 콜백 함수 */
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+
+  /** 인풋 블러 시 실행될 콜백 함수 */
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 
   value?: string;
 
