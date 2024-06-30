@@ -41,7 +41,7 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
   const domRef = useDOMRef(null);
   const inputRef = useDOMRef(ref as ReactRef<HTMLInputElement>);
 
-  const inputStyles = useMemo(() => _inputStyles({ class: className }), [className]);
+  const inputStyles = useMemo(() => _inputStyles({ size, spinnerPlacement, disabled, class: className }), [size, spinnerPlacement, className, disabled]);
   const containerStyles = useMemo(
     () =>
       _containerStyles({
@@ -51,8 +51,8 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
         radius,
         fullWidth,
         disabled,
-        class: containerClassName,
         isFocused,
+        class: containerClassName,
       }),
     [variant, size, color, radius, fullWidth, disabled, containerClassName, isFocused]
   );

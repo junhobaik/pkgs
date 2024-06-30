@@ -4,10 +4,75 @@ import { tv } from 'tailwind-variants';
 import { colorVariants } from './etc/colorVariants';
 
 export const input = tv({
-  base: [
-    'w-full',
-    'outline-none',
-    'bg-transparent',
+  base: ['w-full', 'outline-none', 'bg-transparent'],
+  variants: {
+    spinnerPlacement: {
+      start: '',
+      end: '',
+    },
+    size: {
+      xs: '',
+      sm: '',
+      md: '',
+      lg: '',
+      xl: '',
+    },
+    disabled: {
+      true: '!cursor-not-allowed',
+    },
+  },
+  compoundVariants: [
+    // spinnerPlacement / size
+    {
+      spinnerPlacement: 'start',
+      size: 'xs',
+      class: 'ml-[2px]',
+    },
+    {
+      spinnerPlacement: 'start',
+      size: 'sm',
+      class: 'ml-[4px]',
+    },
+    {
+      spinnerPlacement: 'start',
+      size: 'md',
+      class: 'ml-[6px]',
+    },
+    {
+      spinnerPlacement: 'start',
+      size: 'lg',
+      class: 'ml-[8px]',
+    },
+    {
+      spinnerPlacement: 'start',
+      size: 'xl',
+      class: 'ml-[10px]',
+    },
+    {
+      spinnerPlacement: 'end',
+      size: 'xs',
+      class: 'mr-[2px]',
+    },
+    {
+      spinnerPlacement: 'end',
+      size: 'sm',
+      class: 'mr-[4px]',
+    },
+    {
+      spinnerPlacement: 'end',
+      size: 'md',
+      class: 'mr-[6px]',
+    },
+    {
+      spinnerPlacement: 'end',
+      size: 'lg',
+      class: 'mr-[8px]',
+    },
+    {
+      spinnerPlacement: 'end',
+      size: 'xl',
+      class: 'mr-[10px]',
+    },
   ],
 });
 
