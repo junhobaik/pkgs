@@ -4,6 +4,7 @@ import { Button } from '@junhobaik/ui';
 import '@junhobaik/ui/css';
 import { CodeBlock } from '@/components';
 import { useState } from '@storybook/preview-api';
+import { IconAlertCircle } from '@tabler/icons-react';
 
 const meta = {
   component: Button,
@@ -414,6 +415,22 @@ export const Custom: Story = {
   },
 };
 
+export const AdditionalContent: Story = {
+  render: (args) => {
+    return (
+      <div className="flex">
+        <Button color="primary" {...args} startContent={<IconAlertCircle />}>
+          startContent
+        </Button>
+        &nbsp;&nbsp;
+        <Button color="primary" {...args} endContent={<IconAlertCircle />}>
+          endContent
+        </Button>
+      </div>
+    );
+  },
+};
+
 export const As: Story = {
   render: (args) => {
     return (
@@ -421,6 +438,8 @@ export const As: Story = {
         <Button color="primary" {...args} as="a" href="#">
           as "a tag"
         </Button>
+
+        <CodeBlock code={`<Button as="a" href="#" ...`} lang="javascript" className="mt-2" />
       </div>
     );
   },
