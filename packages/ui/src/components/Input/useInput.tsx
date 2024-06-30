@@ -1,6 +1,6 @@
 // src/components/Input/useInput.tsx
 
-import { ElementType, useEffect, useMemo, useState, useCallback } from 'react';
+import { ElementType, useMemo, useState, useCallback } from 'react';
 import { UseInputProps } from './input.type';
 import { Spinner } from '../Spinner';
 import { useDOMRef } from '../../shared/hooks';
@@ -97,10 +97,6 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     onClick?.(e);
   };
 
-  const handleInputClick = (e: React.MouseEvent<HTMLElementType<T>, MouseEvent>) => {
-    setIsFocused(true);
-  };
-
   const handleDescriptionClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
     inputRef.current?.focus();
     setIsFocused(true);
@@ -122,7 +118,6 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     const filteredProps = filterDOMProps({ ...(props as any) }, { enabled: true });
     return {
       ...filteredProps,
-      onClick: handleInputClick,
       onFocus: handleInputFocus,
       onBlur: handleInputBlur,
     };
@@ -157,7 +152,6 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     containerStyles,
     messageStyles,
     onClickContainer: handleContainerClick,
-    onClickInput: handleInputClick,
     description,
     label,
     labelPlacement,
