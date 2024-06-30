@@ -63,6 +63,9 @@ importers:
       '@junhobaik/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@tabler/icons-react':
+        specifier: ^3.3.0
+        version: 3.6.0(react@18.3.1)
       highlight.js:
         specifier: ^11.9.0
         version: 11.9.0
@@ -5256,6 +5259,15 @@ packages:
     dependencies:
       '@tabler/icons': 3.6.0
       react: 18.2.0
+    dev: false
+
+  /@tabler/icons-react@3.6.0(react@18.3.1):
+    resolution: {integrity: sha512-mkYGxlphNzvKq32teL+Z8wZW7I9zDftmNPX38UnZVCGjss2qbg0puqLhi1unfm5Y0CSefg+iAQrsjSL+DHx9YA==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      '@tabler/icons': 3.6.0
+      react: 18.3.1
     dev: false
 
   /@tabler/icons@3.6.0:
