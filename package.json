@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "storybook": "pnpm exec turbo storybook --filter storybook",
+    "ui": "pnpm --filter ui watch"
+  },
   "dependencies": {
     "turbo": "^2.0.6"
   },
