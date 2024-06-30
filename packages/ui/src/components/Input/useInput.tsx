@@ -4,7 +4,7 @@ import { ElementType, useEffect, useMemo, useState, useCallback } from 'react';
 import { UseInputProps } from './input.type';
 import { Spinner } from '../Spinner';
 import { useDOMRef } from '../../shared/hooks';
-import { input as _inputStyles, inputContainer as _containerStyles } from './input.style';
+import * as styles from './input.style';
 import { filterDOMProps } from '../../shared/utils';
 
 export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T> & { as?: T }) => {
@@ -13,6 +13,14 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     as,
     disabled = false,
     isLoading = false,
+
+    value,
+
+    label,
+    labelPlacement = 'top',
+
+    message,
+    description,
 
     size = 'md',
     radius = 'lg',
@@ -27,11 +35,14 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     endContent,
 
     className = '',
-    containerClassName = '',
 
-    validate,
+    inputContainerClassName = '',
+    containerClassName = '',
+    labelClassName = '',
+    descriptionClassName = '',
+    messageClassName = '',
+
     onClick,
-    value,
     onFocus,
     onBlur,
   } = props;
@@ -41,10 +52,10 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
   const domRef = useDOMRef(null);
   const inputRef = useDOMRef(ref as ReactRef<HTMLInputElement>);
 
-  const inputStyles = useMemo(() => _inputStyles({ size, spinnerPlacement, disabled, class: className }), [size, spinnerPlacement, className, disabled]);
-  const containerStyles = useMemo(
+  const inputStyles = useMemo(() => styles.input({ size, spinnerPlacement, disabled, class: className }), [size, spinnerPlacement, className, disabled]);
+  const inputContainerStyles = useMemo(
     () =>
-      _containerStyles({
+      styles.inputContainer({
         variant,
         size,
         color,
@@ -52,10 +63,17 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
         fullWidth,
         disabled,
         isFocused,
-        class: containerClassName,
+        class: inputContainerClassName,
       }),
-    [variant, size, color, radius, fullWidth, disabled, containerClassName, isFocused]
+    [variant, size, color, radius, fullWidth, disabled, inputContainerClassName, isFocused]
   );
+  const labelStyles = useMemo(
+    () => styles.label({ size, labelPlacement, isDescription: !!description, class: labelClassName }),
+    [size, labelPlacement, labelClassName, description]
+  );
+  const descriptionStyles = useMemo(() => styles.description({ size, labelPlacement, class: descriptionClassName }), [size, labelPlacement, descriptionClassName]);
+  const messageStyles = useMemo(() => styles.message({ size, color, labelPlacement, class: messageClassName }), [size, color, labelPlacement, messageClassName]);
+  const containerStyles = useMemo(() => styles.container({ labelPlacement, class: containerClassName }), [labelPlacement, containerClassName]);
 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement>) => {
@@ -83,10 +101,10 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     setIsFocused(true);
   };
 
-  const parsedValue = useMemo(() => {
-    // TODO: validate
-    return value;
-  }, [value, validate]);
+  const handleDescriptionClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
+    inputRef.current?.focus();
+    setIsFocused(true);
+  };
 
   const spinnerElement = useMemo(() => {
     if (spinner) return spinner;
@@ -101,13 +119,20 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
   };
 
   const getInputProps = () => {
-    const filteredProps = filterDOMProps({ ...(props as any), value: parsedValue }, { enabled: true });
+    const filteredProps = filterDOMProps({ ...(props as any) }, { enabled: true });
     return {
       ...filteredProps,
       onClick: handleInputClick,
       onFocus: handleInputFocus,
       onBlur: handleInputBlur,
     };
+  };
+
+  const getLabelProps = () => {
+    return {};
+  };
+  const getDescriptionProps = () => {
+    return { onClick: handleDescriptionClick };
   };
 
   const Component = as || 'div';
@@ -123,10 +148,20 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     spinnerPlacement,
     getInputProps,
     getContainerProps,
+    getLabelProps,
+    getDescriptionProps,
     inputStyles,
+    inputContainerStyles,
+    labelStyles,
+    descriptionStyles,
     containerStyles,
+    messageStyles,
     onClickContainer: handleContainerClick,
     onClickInput: handleInputClick,
-    isFocused, // 새로 추가된 부분
+    description,
+    label,
+    labelPlacement,
+    isFocused,
+    message,
   };
 };

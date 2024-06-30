@@ -7,7 +7,6 @@ export type InputVariants = 'bordered' | 'flat' | 'underlined' | 'faded';
 export type InputRadius = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full';
 export type InputSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type InputSpinnerPlacement = 'start' | 'end';
-export type InputValidate = [(value: string) => boolean, { timing?: 'on-change' | 'focus-out'; blockChange?: boolean }] | ((value: string) => boolean);
 
 export type UseInputProps<T extends ElementType> = {
   /**
@@ -26,10 +25,34 @@ export type UseInputProps<T extends ElementType> = {
   className?: string;
 
   /**
-   * 인풋 컨테이너에 적용할 추가 CSS 클래스
+   * 컨테이너에 적용할 추가 CSS 클래스
    * @default ''
    */
   containerClassName?: string;
+
+  /**
+   * 인풋 컨테이너에 적용할 추가 CSS 클래스
+   * @default ''
+   */
+  inputContainerClassName?: string;
+
+  /**
+   * 인풋 라벨에 적용할 추가 CSS 클래스
+   * @default ''
+   */
+  labelClassName?: string;
+
+  /**
+   * 인풋 설명에 적용할 추가 CSS 클래스
+   * @default ''
+   */
+  descriptionClassName?: string;
+
+  /**
+   * 인풋 메세지에 적용할 추가 CSS 클래스
+   * @default ''
+   */
+  messageClassName?: string;
 
   /**
    * 인풋을 부모 요소의 전체 너비로 확장할지 여부
@@ -98,9 +121,10 @@ export type UseInputProps<T extends ElementType> = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 
   value?: string;
-
-  /** */
-  validate?: InputValidate;
+  message?: string;
+  description?: string;
+  label?: string;
+  labelPlacement?: 'top' | 'left';
 };
 
 export type InputProps<T extends ElementType> = UseInputProps<T> & Omit<ComponentPropsWithRef<T>, keyof UseInputProps<T>>;

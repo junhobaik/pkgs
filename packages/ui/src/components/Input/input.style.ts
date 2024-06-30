@@ -440,3 +440,141 @@ export const inputContainer = tv({
     fullWidth: false,
   },
 });
+
+export const label = tv({
+  base: ['font-semibold', 'text-gray-900'],
+  variants: {
+    size: {
+      xs: 'text-xs leading-tight',
+      sm: 'text-sm leading-tight',
+      md: 'text-md leading-tight',
+      lg: 'text-lg leading-tight',
+      xl: 'text-xl leading-tight',
+    },
+    isDescription: {
+      true: '',
+      false: 'pb-1',
+    },
+    labelPlacement: {
+      top: '',
+      left: '',
+    },
+  },
+  compoundVariants: [
+    {
+      labelPlacement: 'left',
+      size: 'xs',
+      class: 'pt-[0.35rem] pr-2',
+    },
+    {
+      labelPlacement: 'left',
+      size: 'sm',
+      class: 'pt-[0.42rem] pr-2',
+    },
+    {
+      labelPlacement: 'left',
+      size: 'md',
+      class: 'pt-[0.6rem] pr-3',
+    },
+    {
+      labelPlacement: 'left',
+      size: 'lg',
+      class: 'pt-[0.72rem] pr-4',
+    },
+    {
+      labelPlacement: 'left',
+      size: 'xl',
+      class: 'pt-[0.8rem] pr-4',
+    },
+  ],
+});
+
+export const description = tv({
+  base: ['font-normal', 'text-gray-500'],
+  variants: {
+    size: {
+      xs: 'text-[0.6rem] leading-tight',
+      sm: 'text-xs leading-tight pb-[2px]',
+      md: 'text-sm leading-tight pb-[2px]',
+      lg: 'text-md leading-tight pb-[4px]',
+      xl: 'text-lg leading-tight pb-[4px]',
+    },
+    labelPlacement: {
+      top: '',
+      left: 'pt-1 pl-[2px]',
+    },
+  },
+  compoundVariants: [],
+});
+
+export const message = tv({
+  base: ['font-normal', 'text-gray-500', 'pl-[2px]'],
+  variants: {
+    size: {
+      xs: 'text-[0.6rem] leading-tight',
+      sm: 'text-xs leading-tight',
+      md: 'text-sm leading-tight',
+      lg: 'text-md leading-tight',
+      xl: 'text-lg leading-tight',
+    },
+    color: {
+      default: '',
+      primary: '',
+      secondary: '',
+      success: '',
+      warning: '',
+      danger: '',
+    },
+    labelPlacement: {
+      top: 'mt-[2px]',
+      left: '',
+    },
+  },
+  compoundVariants: [
+    {
+      color: 'default',
+      class: 'text-gray-500',
+    },
+    {
+      color: 'primary',
+      class: 'text-blue-500',
+    },
+    {
+      color: 'secondary',
+      class: 'text-purple-500',
+    },
+    {
+      color: 'success',
+      class: 'text-green-500',
+    },
+    {
+      color: 'warning',
+      class: 'text-yellow-600',
+    },
+    {
+      color: 'danger',
+      class: 'text-red-500',
+    },
+  ],
+});
+
+export const container = tv({
+  base: ['inline-flex'],
+  variants: {
+    labelPlacement: {
+      top: 'flex-col',
+      left: 'flex-row',
+    },
+    size: {
+      xs: '',
+      sm: '',
+      md: '',
+      lg: '',
+      xl: '',
+    },
+    disabled: {
+      true: '',
+    },
+  },
+  compoundVariants: [],
+});

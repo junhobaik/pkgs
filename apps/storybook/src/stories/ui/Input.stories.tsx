@@ -160,7 +160,7 @@ export const Loading: Story = {
   },
 };
 
-export const AdditionalContent: Story = {
+export const Contents: Story = {
   args: {},
   render: (args) => {
     return (
@@ -168,6 +168,71 @@ export const AdditionalContent: Story = {
         <Input {...args} placeholder="startContent" startContent={<IconAlertCircle />} />
         &nbsp;&nbsp;&nbsp;
         <Input {...args} placeholder="endContent" endContent={<IconAlertCircle />} />
+      </div>
+    );
+  },
+};
+
+export const Label: Story = {
+  args: {},
+  render: (args) => {
+    return (
+      <div className="flex">
+        <Input {...args} containerClassName="m-2" placeholder="label" label="Top Label" />
+        <Input {...args} containerClassName="m-2" placeholder="label" label="Left Label" labelPlacement="left" />
+      </div>
+    );
+  },
+};
+
+export const Description: Story = {
+  args: {},
+  render: (args) => {
+    return (
+      <div className="flex">
+        <Input {...args} containerClassName="m-2" placeholder="label" label="Top Label" description="Top Label, Description" />
+        <Input {...args} containerClassName="m-2" placeholder="label" label="Left Label" labelPlacement="left" description="Left Label, Description" />
+      </div>
+    );
+  },
+};
+
+export const Message: Story = {
+  args: {},
+  render: (args) => {
+    const colors = ['default', 'primary', 'secondary', 'success', 'warning', 'danger'] as const;
+
+    const list = colors.map((color) => (
+      <li key={color} className="m-2">
+        <Input {...args} color={color} placeholder={color} message="message text..." />
+      </li>
+    ));
+
+    return (
+      <div>
+        <ul className="flex flex-wrap">{list}</ul>
+        <div className="mt-4">
+          <Input
+            color="danger"
+            {...args}
+            containerClassName="m-2"
+            placeholder="with description"
+            label="Top label"
+            labelPlacement="top"
+            description="Top Label, Description"
+            message="message text..."
+          />
+          <Input
+            color="danger"
+            {...args}
+            containerClassName="m-2"
+            placeholder="with description"
+            label="Left label"
+            labelPlacement="left"
+            description="Top Label, Description"
+            message="message text..."
+          />
+        </div>
       </div>
     );
   },
