@@ -5,13 +5,178 @@ import '@junhobaik/ui/css';
 import { IconAlertCircle, IconLoader3 } from '@tabler/icons-react';
 
 const meta = {
-  title: 'UI/Input [🚧 Not released]',
   component: Input,
   tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
         component: 'import { Input } from "@junhobaik/ui";',
+      },
+    },
+  },
+  argTypes: {
+    value: {
+      control: 'text',
+      description: 'Input value',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    onChange: {
+      description: 'Change event handler',
+      table: {
+        type: { summary: '(event: ChangeEvent<HTMLInputElement>) => void' },
+      },
+    },
+    type: {
+      control: 'select',
+      options: ['text', 'password', 'email', 'number', 'tel', 'url'],
+      description: 'Input type',
+      table: {
+        defaultValue: { summary: '"text"' },
+        type: { summary: `'text' | 'password' | 'email' | 'number' | 'tel' | 'url'` },
+      },
+    },
+    label: {
+      control: 'text',
+      description: 'Input label',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    description: {
+      control: 'text',
+      description: 'Input description',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    message: {
+      control: 'text',
+      description: 'Input message (often used for error messages)',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Input size',
+      table: {
+        defaultValue: { summary: '"md"' },
+        type: { summary: `'xs' | 'sm' | 'md' | 'lg' | 'xl'` },
+      },
+    },
+    color: {
+      control: 'select',
+      options: ['default', 'primary', 'secondary', 'success', 'warning', 'danger'],
+      description: 'Input color',
+      table: {
+        defaultValue: { summary: '"default"' },
+        type: { summary: `'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'` },
+      },
+    },
+    variant: {
+      control: 'select',
+      options: ['bordered', 'flat', 'underlined', 'faded'],
+      description: 'Input variant',
+      table: {
+        defaultValue: { summary: '"bordered"' },
+        type: { summary: `'bordered' | 'flat' | 'underlined' | 'faded'` },
+      },
+    },
+    radius: {
+      control: 'select',
+      options: ['none', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
+      description: 'Input border radius',
+      table: {
+        defaultValue: { summary: '"lg"' },
+        type: { summary: `'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'` },
+      },
+    },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Full width input',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    labelPlacement: {
+      control: 'radio',
+      options: ['top', 'left'],
+      description: 'Label placement',
+      table: {
+        defaultValue: { summary: '"top"' },
+        type: { summary: `'top' | 'left'` },
+      },
+    },
+    startContent: {
+      description: 'Content at the start of the input',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
+    },
+    endContent: {
+      description: 'Content at the end of the input',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
+    },
+    isLoading: {
+      control: 'boolean',
+      description: 'Show loading spinner',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Input disabled state',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    spinner: {
+      description: 'Custom spinner element',
+      table: {
+        type: { summary: 'ReactElement' },
+      },
+    },
+    spinnerPlacement: {
+      control: 'radio',
+      options: ['start', 'end'],
+      description: 'Placement of the spinner',
+      table: {
+        defaultValue: { summary: '"end"' },
+        type: { summary: `'start' | 'end'` },
+      },
+    },
+    as: {
+      control: 'text',
+      description: 'Render input as different element',
+      table: {
+        defaultValue: { summary: '"div"' },
+        type: { summary: 'ElementType' },
+      },
+    },
+    ref: {
+      description: 'Ref to the input element',
+      table: {
+        type: { summary: 'Ref<HTMLInputElement>' },
+      },
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS class',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    passwordToggle: {
+      control: 'boolean',
+      description: 'Enable password visibility toggle',
+      table: {
+        defaultValue: { summary: 'false' },
       },
     },
   },
