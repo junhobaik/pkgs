@@ -41,13 +41,15 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     labelClassName = '',
     descriptionClassName = '',
     messageClassName = '',
-
+    type = 'text',
+    passwordToggle = false,
     onClick,
     onFocus,
     onBlur,
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const domRef = useDOMRef(null);
   const inputRef = useDOMRef(ref as ReactRef<HTMLInputElement>);
@@ -74,6 +76,10 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
   const descriptionStyles = useMemo(() => styles.description({ size, labelPlacement, class: descriptionClassName }), [size, labelPlacement, descriptionClassName]);
   const messageStyles = useMemo(() => styles.message({ size, color, labelPlacement, class: messageClassName }), [size, color, labelPlacement, messageClassName]);
   const containerStyles = useMemo(() => styles.container({ labelPlacement, class: containerClassName }), [labelPlacement, containerClassName]);
+
+  const togglePasswordVisibility = useCallback(() => {
+    setShowPassword((prev) => !prev);
+  }, []);
 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement>) => {
@@ -120,6 +126,7 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
       ...filteredProps,
       onFocus: handleInputFocus,
       onBlur: handleInputBlur,
+      type: type === 'password' && showPassword ? 'text' : type,
     };
   };
 
@@ -157,5 +164,9 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     labelPlacement,
     isFocused,
     message,
+    type,
+    showPassword,
+    passwordToggle: passwordToggle && type === 'password',
+    togglePasswordVisibility,
   };
 };

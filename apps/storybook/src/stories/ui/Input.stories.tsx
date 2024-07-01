@@ -237,3 +237,15 @@ export const Message: Story = {
     );
   },
 };
+
+export const Password: Story = {
+  args: {},
+  render: (args) => {
+    return (
+      <div className="flex">
+        <Input {...args} containerClassName="m-2" placeholder="label" label="PW:" description="Enter New Password" type="password" />
+        <Input {...args} containerClassName="m-2" placeholder="label" label="PW:" description="Enter New Password" type="password" passwordToggle />
+      </div>
+    );
+  },
+};

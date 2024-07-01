@@ -1,6 +1,7 @@
 import { ElementType, forwardRef, ForwardRefExoticComponent, ForwardRefRenderFunction, ReactElement, Ref, useId, useMemo } from 'react';
 import { InputProps } from './input.type';
 import { useInput } from './useInput';
+import PasswordVisibilityIcon from './etc/PasswordVisibilityIcon';
 
 type InputComponent = ForwardRefExoticComponent<InputProps<any>> & {
   <T extends ElementType = 'div'>(props: InputProps<T> & { ref?: Ref<any> }): ReactElement;
@@ -32,6 +33,10 @@ const InputBase: ForwardRefRenderFunction<unknown, InputProps<any>> = (props, re
     getLabelProps,
     getDescriptionProps,
     getContainerProps,
+    type,
+    showPassword,
+    passwordToggle,
+    togglePasswordVisibility,
   } = useInput({
     ...props,
     ref,
@@ -55,6 +60,7 @@ const InputBase: ForwardRefRenderFunction<unknown, InputProps<any>> = (props, re
           {isLoading && spinnerPlacement === 'start' && spinner}
           <input id={id} className={inputStyles} ref={inputRef} {...getInputProps()} />
           {isLoading && spinnerPlacement === 'end' && spinner}
+          {passwordToggle && <PasswordVisibilityIcon isVisible={showPassword} onClick={togglePasswordVisibility} />}
           {endContent}
         </Component>
         {!!message && <p className={messageStyles}>{message}</p>}
@@ -75,6 +81,7 @@ const InputBase: ForwardRefRenderFunction<unknown, InputProps<any>> = (props, re
           {isLoading && spinnerPlacement === 'start' && spinner}
           <input id={id} className={inputStyles} ref={inputRef} {...getInputProps()} />
           {isLoading && spinnerPlacement === 'end' && spinner}
+          {passwordToggle && <PasswordVisibilityIcon isVisible={showPassword} onClick={togglePasswordVisibility} />}
           {endContent}
         </Component>
         {!!description && (

@@ -4,7 +4,7 @@ import { tv } from 'tailwind-variants';
 import { colorVariants } from './etc/colorVariants';
 
 export const input = tv({
-  base: ['w-full', 'outline-none', 'bg-transparent'],
+  base: ['w-full', 'outline-none', 'bg-transparent', 'hide-password-reveal'],
   variants: {
     spinnerPlacement: {
       start: '',

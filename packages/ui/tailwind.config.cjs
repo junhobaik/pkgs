@@ -4,5 +4,16 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    ({ addUtilities }) => {
+      const newUtilities = {
+        '.hide-password-reveal': {
+          '&::-ms-reveal, &::-ms-clear': {
+            display: 'none',
+          },
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 };

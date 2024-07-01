@@ -125,6 +125,8 @@ export type UseInputProps<T extends ElementType> = {
   description?: string;
   label?: string;
   labelPlacement?: 'top' | 'left';
+  type?: string;
+  passwordToggle?: boolean;
 };
 
 export type InputProps<T extends ElementType> = UseInputProps<T> & Omit<ComponentPropsWithRef<T>, keyof UseInputProps<T>>;
