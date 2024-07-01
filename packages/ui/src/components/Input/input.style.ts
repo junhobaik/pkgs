@@ -457,7 +457,7 @@ export const label = tv({
     },
     labelPlacement: {
       top: '',
-      left: '',
+      left: 'text-nowrap',
     },
   },
   compoundVariants: [
