@@ -1,4 +1,4 @@
-import { ElementType, forwardRef, ForwardRefExoticComponent, ForwardRefRenderFunction, ReactElement, Ref, useId, useMemo } from 'react';
+import { ElementType, forwardRef, ForwardRefExoticComponent, ForwardRefRenderFunction, ReactElement, Ref, useId } from 'react';
 import { InputProps } from './input.type';
 import { useInput } from './useInput';
 import PasswordVisibilityIcon from './etc/PasswordVisibilityIcon';
@@ -33,70 +33,50 @@ const InputBase: ForwardRefRenderFunction<unknown, InputProps<any>> = (props, re
     getLabelProps,
     getDescriptionProps,
     getContainerProps,
-    type,
-    showPassword,
     passwordToggle,
+    showPassword,
     togglePasswordVisibility,
   } = useInput({
     ...props,
     ref,
   });
 
-  const topLabelView = (
+  const labelEl = label && (
+    <label htmlFor={id} className={labelStyles} {...getLabelProps()}>
+      {label}
+    </label>
+  );
+
+  const descriptionEl = description && (
+    <p className={descriptionStyles} {...getDescriptionProps()}>
+      {description}
+    </p>
+  );
+
+  const messageEl = message && <p className={messageStyles}>{message}</p>;
+
+  const inputContainerEl = (
+    <Component ref={domRef} className={inputContainerStyles} {...getContainerProps()}>
+      {startContent}
+      {isLoading && spinnerPlacement === 'start' && spinner}
+      <input id={id} className={inputStyles} ref={inputRef} {...getInputProps()} />
+      {isLoading && spinnerPlacement === 'end' && spinner}
+      {passwordToggle && <PasswordVisibilityIcon isVisible={showPassword} onClick={togglePasswordVisibility} />}
+      {endContent}
+    </Component>
+  );
+
+  return (
     <div className={containerStyles}>
-      {!!label && (
-        <label htmlFor={id} className={labelStyles} {...getLabelProps()}>
-          {label}
-        </label>
-      )}
-      {!!description && (
-        <p className={descriptionStyles} {...getDescriptionProps()}>
-          {description}
-        </p>
-      )}
+      {labelEl}
+      {labelPlacement === 'top' && descriptionEl}
       <div>
-        <Component ref={domRef} className={inputContainerStyles} {...getContainerProps()}>
-          {startContent}
-          {isLoading && spinnerPlacement === 'start' && spinner}
-          <input id={id} className={inputStyles} ref={inputRef} {...getInputProps()} />
-          {isLoading && spinnerPlacement === 'end' && spinner}
-          {passwordToggle && <PasswordVisibilityIcon isVisible={showPassword} onClick={togglePasswordVisibility} />}
-          {endContent}
-        </Component>
-        {!!message && <p className={messageStyles}>{message}</p>}
+        {inputContainerEl}
+        {labelPlacement === 'left' && descriptionEl}
+        {messageEl}
       </div>
     </div>
   );
-
-  const leftLabelView = (
-    <div className={containerStyles}>
-      {!!label && (
-        <label htmlFor={id} className={labelStyles} {...getLabelProps()}>
-          {label}
-        </label>
-      )}
-      <div>
-        <Component ref={domRef} className={inputContainerStyles} {...getContainerProps()}>
-          {startContent}
-          {isLoading && spinnerPlacement === 'start' && spinner}
-          <input id={id} className={inputStyles} ref={inputRef} {...getInputProps()} />
-          {isLoading && spinnerPlacement === 'end' && spinner}
-          {passwordToggle && <PasswordVisibilityIcon isVisible={showPassword} onClick={togglePasswordVisibility} />}
-          {endContent}
-        </Component>
-        {!!description && (
-          <p className={descriptionStyles} {...getDescriptionProps()}>
-            {description}
-          </p>
-        )}
-        {!!message && <p className={messageStyles}>{message}</p>}
-      </div>
-    </div>
-  );
-
-  if (labelPlacement === 'left') return leftLabelView;
-
-  return topLabelView;
 };
 
 const Input = forwardRef(InputBase) as InputComponent;

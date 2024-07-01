@@ -1,11 +1,18 @@
-// src/components/Input/useInput.tsx
-
 import { ElementType, useMemo, useState, useCallback } from 'react';
-import { UseInputProps } from './input.type';
+import { InputSize, UseInputProps } from './input.type';
 import { Spinner } from '../Spinner';
 import { useDOMRef } from '../../shared/hooks';
 import * as styles from './input.style';
 import { filterDOMProps } from '../../shared/utils';
+
+// Constants
+const SPINNER_SIZES: Record<InputSize, { size: number; borderWidth: number }> = {
+  xs: { size: 10, borderWidth: 2 },
+  sm: { size: 12, borderWidth: 2 },
+  md: { size: 14, borderWidth: 3 },
+  lg: { size: 18, borderWidth: 4 },
+  xl: { size: 22, borderWidth: 4 },
+};
 
 export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T> & { as?: T }) => {
   const {
@@ -13,29 +20,20 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     as,
     disabled = false,
     isLoading = false,
-
-    value,
-
     label,
     labelPlacement = 'top',
-
     message,
     description,
-
     size = 'md',
     radius = 'lg',
     color = 'default',
     variant = 'bordered',
     fullWidth = false,
-
     spinner,
     spinnerPlacement = 'end',
-
     startContent,
     endContent,
-
     className = '',
-
     inputContainerClassName = '',
     containerClassName = '',
     labelClassName = '',
@@ -56,17 +54,7 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
 
   const inputStyles = useMemo(() => styles.input({ size, spinnerPlacement, disabled, class: className }), [size, spinnerPlacement, className, disabled]);
   const inputContainerStyles = useMemo(
-    () =>
-      styles.inputContainer({
-        variant,
-        size,
-        color,
-        radius,
-        fullWidth,
-        disabled,
-        isFocused,
-        class: inputContainerClassName,
-      }),
+    () => styles.inputContainer({ variant, size, color, radius, fullWidth, disabled, isFocused, class: inputContainerClassName }),
     [variant, size, color, radius, fullWidth, disabled, inputContainerClassName, isFocused]
   );
   const labelStyles = useMemo(
@@ -77,9 +65,11 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
   const messageStyles = useMemo(() => styles.message({ size, color, labelPlacement, class: messageClassName }), [size, color, labelPlacement, messageClassName]);
   const containerStyles = useMemo(() => styles.container({ labelPlacement, class: containerClassName }), [labelPlacement, containerClassName]);
 
-  const togglePasswordVisibility = useCallback(() => {
-    setShowPassword((prev) => !prev);
-  }, []);
+  const spinnerElement = useMemo(() => {
+    if (spinner) return spinner;
+    const { size: spinnerSize, borderWidth } = SPINNER_SIZES[size] || SPINNER_SIZES.md;
+    return <Spinner size={spinnerSize} borderWidth={borderWidth} />;
+  }, [spinner, size]);
 
   const handleInputFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement>) => {
@@ -97,48 +87,43 @@ export const useInput = <T extends ElementType = 'input'>(props: UseInputProps<T
     [onBlur]
   );
 
-  const handleContainerClick = (e: React.MouseEvent<HTMLElementType<T>, MouseEvent>) => {
+  const handleContainerClick = useCallback(
+    (e: React.MouseEvent<HTMLElementType<T>, MouseEvent>) => {
+      inputRef.current?.focus();
+      setIsFocused(true);
+      onClick?.(e);
+    },
+    [onClick]
+  );
+
+  const handleDescriptionClick = useCallback(() => {
     inputRef.current?.focus();
     setIsFocused(true);
-    onClick?.(e);
-  };
+  }, []);
 
-  const handleDescriptionClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
-    inputRef.current?.focus();
-    setIsFocused(true);
-  };
+  const togglePasswordVisibility = useCallback(() => {
+    setShowPassword((prev) => !prev);
+  }, []);
 
-  const spinnerElement = useMemo(() => {
-    if (spinner) return spinner;
-    if (size === 'md') return <Spinner size={14} borderWidth={3} />;
-    if (size === 'sm') return <Spinner size={12} borderWidth={2} />;
-    if (size === 'lg') return <Spinner size={18} borderWidth={4} />;
-    return <Spinner />;
-  }, [spinner, size]);
+  const getContainerProps = useCallback(() => ({ onClick: handleContainerClick }), [handleContainerClick]);
 
-  const getContainerProps = () => {
-    return { onClick: handleContainerClick };
-  };
-
-  const getInputProps = () => {
-    const filteredProps = filterDOMProps({ ...(props as any) }, { enabled: true });
+  const getInputProps = useCallback(() => {
+    const filteredProps = filterDOMProps(props as any, { enabled: true });
     return {
       ...filteredProps,
       onFocus: handleInputFocus,
       onBlur: handleInputBlur,
       type: type === 'password' && showPassword ? 'text' : type,
     };
-  };
+  }, [props, handleInputFocus, handleInputBlur, type, showPassword]);
 
-  const getLabelProps = () => {
-    return {};
-  };
-  const getDescriptionProps = () => {
-    return { onClick: handleDescriptionClick };
-  };
+  const getLabelProps = useCallback(() => ({}), []);
+
+  const getDescriptionProps = useCallback(() => ({ onClick: handleDescriptionClick }), [handleDescriptionClick]);
 
   const Component = as || 'div';
 
+  // Return object
   return {
     Component,
     domRef,
